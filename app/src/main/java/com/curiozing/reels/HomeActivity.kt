@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.curiozing.reels.ui.theme.ReelsTheme
 
@@ -101,12 +102,19 @@ fun BottomBarNavigation(navController: NavHostController) {
         BottomNavigationItem.CreateReel,
         BottomNavigationItem.Profile,
     )
+    val currentScreen = navController.currentBackStackEntryAsState().value?.destination
 
     BottomNavigation {
         bottomItems.forEach {
-            BottomNavigationItem(selected = false,
+            BottomNavigationItem(selected = it.route == currentScreen?.route,
                 onClick = {
-                        navController.navigate(it.route)
+                        navController.navigate(it.route){
+                            popUpTo(navController.graph.startDestinationId){
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                 },
                 icon = {
                     Icon(imageVector = it.icon, contentDescription = "")
