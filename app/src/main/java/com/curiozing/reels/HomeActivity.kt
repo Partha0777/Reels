@@ -1,9 +1,17 @@
 package com.curiozing.reels
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -35,6 +43,7 @@ fun AppNavigator(){
     }
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomeContent(){
     ReelsTheme {
@@ -42,7 +51,27 @@ fun HomeContent(){
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            Greeting("Android")
+           Scaffold(
+               bottomBar = {
+                   BottomBarNavigation()
+               }
+           ) { it ->
+
+           }
+
+        }
+    }
+}
+
+@Composable
+fun BottomBarNavigation(){
+    BottomNavigation {
+        repeat(3){
+            BottomNavigationItem(selected = false,
+                onClick = {  },
+                icon = {
+                    Icon(imageVector = Icons.Default.Home, contentDescription = "")
+                })
         }
     }
 }
