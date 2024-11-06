@@ -1,6 +1,7 @@
 package com.curiozing.reels
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,12 +13,16 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -34,6 +39,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+sealed class BottomNavigationItem(val name: String,val route: String, val icon: ImageVector){
+    data object Home:BottomNavigationItem("Home","home", Icons.Default.Home)
+    data object CreateReel:BottomNavigationItem("Create","createReels", Icons.Default.PlayArrow)
+    data object Profile:BottomNavigationItem("Profile","profile", Icons.Default.Person)
+}
+
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AppContent(){
@@ -48,14 +59,14 @@ fun AppContent(){
                    BottomBarNavigation(navController)
                }
            ) {
-               NavHost(navController = navController, startDestination = "home"){
-                   composable("home") {
+               NavHost(navController = navController, startDestination = BottomNavigationItem.Home.route){
+                   composable(BottomNavigationItem.Home.route) {
                        Home()
                    }
-                   composable("createReel") {
+                   composable(BottomNavigationItem.CreateReel.route) {
                        CreateReels()
                    }
-                   composable("profile") {
+                   composable(BottomNavigationItem.Profile.route) {
                        Profile()
                    }
                }
@@ -85,16 +96,20 @@ fun Profile() {
 
 @Composable
 fun BottomBarNavigation(navController: NavHostController) {
+    val bottomItems = listOf(
+        BottomNavigationItem.Home,
+        BottomNavigationItem.CreateReel,
+        BottomNavigationItem.Profile,
+    )
+
     BottomNavigation {
-        repeat(3){
+        bottomItems.forEach {
             BottomNavigationItem(selected = false,
                 onClick = {
-                          if(it == 1){
-                              navController.navigate("createReel")
-                          }
+                        navController.navigate(it.route)
                 },
                 icon = {
-                    Icon(imageVector = Icons.Default.Home, contentDescription = "")
+                    Icon(imageVector = it.icon, contentDescription = "")
                 })
         }
     }
