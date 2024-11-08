@@ -108,7 +108,6 @@ fun BottomBarNavigation(navController: NavHostController) {
 }
 
 
-
 sealed class BottomNavigationItem(val name: String, val route: String, val icon: ImageVector) {
     data object Home : BottomNavigationItem("Home", "home", Icons.Default.Home)
     data object CreateReel : BottomNavigationItem("Create", "createReels", Icons.Default.PlayArrow)
