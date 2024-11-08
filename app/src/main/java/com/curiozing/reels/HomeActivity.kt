@@ -40,38 +40,41 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-sealed class BottomNavigationItem(val name: String,val route: String, val icon: ImageVector){
-    data object Home:BottomNavigationItem("Home","home", Icons.Default.Home)
-    data object CreateReel:BottomNavigationItem("Create","createReels", Icons.Default.PlayArrow)
-    data object Profile:BottomNavigationItem("Profile","profile", Icons.Default.Person)
+sealed class BottomNavigationItem(val name: String, val route: String, val icon: ImageVector) {
+    data object Home : BottomNavigationItem("Home", "home", Icons.Default.Home)
+    data object CreateReel : BottomNavigationItem("Create", "createReels", Icons.Default.PlayArrow)
+    data object Profile : BottomNavigationItem("Profile", "profile", Icons.Default.Person)
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AppContent(){
+fun AppContent() {
     val navController = rememberNavController()
     ReelsTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-           Scaffold(
-               bottomBar = {
-                   BottomBarNavigation(navController)
-               }
-           ) {
-               NavHost(navController = navController, startDestination = BottomNavigationItem.Home.route){
-                   composable(BottomNavigationItem.Home.route) {
-                       Home()
-                   }
-                   composable(BottomNavigationItem.CreateReel.route) {
-                       CreateReels()
-                   }
-                   composable(BottomNavigationItem.Profile.route) {
-                       Profile()
-                   }
-               }
-           }
+            Scaffold(
+                bottomBar = {
+                    BottomBarNavigation(navController)
+                }
+            ) {
+                NavHost(
+                    navController = navController,
+                    startDestination = BottomNavigationItem.Home.route
+                ) {
+                    composable(BottomNavigationItem.Home.route) {
+                        Home()
+                    }
+                    composable(BottomNavigationItem.CreateReel.route) {
+                        CreateReels()
+                    }
+                    composable(BottomNavigationItem.Profile.route) {
+                        Profile()
+                    }
+                }
+            }
 
         }
     }
@@ -109,13 +112,13 @@ fun BottomBarNavigation(navController: NavHostController) {
             BottomNavigationItem(
                 selected = it.route == currentScreen?.route,
                 onClick = {
-                        navController.navigate(it.route){
-                            popUpTo(navController.graph.startDestinationId){
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
+                    navController.navigate(it.route) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            saveState = true
                         }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 },
                 icon = {
                     Icon(imageVector = it.icon, contentDescription = "")
