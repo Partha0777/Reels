@@ -106,7 +106,8 @@ fun BottomBarNavigation(navController: NavHostController) {
 
     BottomNavigation {
         bottomItems.forEach {
-            BottomNavigationItem(selected = it.route == currentScreen?.route,
+            BottomNavigationItem(
+                selected = it.route == currentScreen?.route,
                 onClick = {
                         navController.navigate(it.route){
                             popUpTo(navController.graph.startDestinationId){
