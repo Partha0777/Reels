@@ -29,6 +29,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.curiozing.reels.composeUi.CreateReel
+import com.curiozing.reels.composeUi.Home
+import com.curiozing.reels.composeUi.Profile
 import com.curiozing.reels.ui.theme.ReelsTheme
 
 class MainActivity : ComponentActivity() {
@@ -38,12 +41,6 @@ class MainActivity : ComponentActivity() {
             AppContent()
         }
     }
-}
-
-sealed class BottomNavigationItem(val name: String, val route: String, val icon: ImageVector) {
-    data object Home : BottomNavigationItem("Home", "home", Icons.Default.Home)
-    data object CreateReel : BottomNavigationItem("Create", "createReels", Icons.Default.PlayArrow)
-    data object Profile : BottomNavigationItem("Profile", "profile", Icons.Default.Person)
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -68,7 +65,7 @@ fun AppContent() {
                         Home()
                     }
                     composable(BottomNavigationItem.CreateReel.route) {
-                        CreateReels()
+                        CreateReel()
                     }
                     composable(BottomNavigationItem.Profile.route) {
                         Profile()
@@ -78,23 +75,6 @@ fun AppContent() {
 
         }
     }
-}
-
-@Composable
-fun Home() {
-    Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {
-        Text(text = "Home")
-    }
-}
-
-@Composable
-fun CreateReels() {
-    Text(text = "Reels")
-}
-
-@Composable
-fun Profile() {
-    Text(text = "Profile")
 }
 
 
@@ -127,18 +107,19 @@ fun BottomBarNavigation(navController: NavHostController) {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+
+
+sealed class BottomNavigationItem(val name: String, val route: String, val icon: ImageVector) {
+    data object Home : BottomNavigationItem("Home", "home", Icons.Default.Home)
+    data object CreateReel : BottomNavigationItem("Create", "createReels", Icons.Default.PlayArrow)
+    data object Profile : BottomNavigationItem("Profile", "profile", Icons.Default.Person)
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     ReelsTheme {
-        Greeting("Android")
+        AppContent()
     }
 }
