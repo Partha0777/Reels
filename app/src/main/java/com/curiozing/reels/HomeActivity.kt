@@ -63,7 +63,9 @@ fun AppSplashScreen(navController: NavController){
                 LaunchedEffect(key1 = true){
                     delay(3000)
                     navController.navigate("main"){
-                        popUpTo(navController.graph.startDestinationId)
+                        popUpTo("splash"){
+                            inclusive = true
+                        }
                     }
                 }
             }
