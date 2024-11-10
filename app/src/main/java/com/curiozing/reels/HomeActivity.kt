@@ -38,7 +38,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppScreenNavigator()
+            ReelsTheme {
+                AppScreenNavigator()
+            }
         }
     }
 }
@@ -46,7 +48,6 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun AppSplashScreen(navController: NavController) {
-    ReelsTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
@@ -63,7 +64,6 @@ fun AppSplashScreen(navController: NavController) {
                 }
             }
         }
-    }
 }
 
 
@@ -120,7 +120,9 @@ fun BottomBarNavigation(navController: NavHostController) {
     )
     val currentScreen = navController.currentBackStackEntryAsState().value?.destination
 
-    BottomNavigation {
+    BottomNavigation(
+        backgroundColor = MaterialTheme.colorScheme.primary
+    ) {
         bottomItems.forEach {
             BottomNavigationItem(
                 selected = it.route == currentScreen?.route,
