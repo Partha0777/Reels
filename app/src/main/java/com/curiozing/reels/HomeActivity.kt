@@ -1,12 +1,9 @@
 package com.curiozing.reels
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Icon
 import android.os.Bundle
-import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.BottomNavigation
@@ -14,7 +11,6 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
@@ -36,10 +32,7 @@ import com.curiozing.reels.composeUi.CreateReel
 import com.curiozing.reels.composeUi.Home
 import com.curiozing.reels.composeUi.Profile
 import com.curiozing.reels.ui.theme.ReelsTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +45,7 @@ class MainActivity : ComponentActivity() {
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun AppSplashScreen(navController: NavController){
+fun AppSplashScreen(navController: NavController) {
     ReelsTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -60,10 +53,10 @@ fun AppSplashScreen(navController: NavController){
         ) {
             Column(modifier = Modifier.fillMaxSize()) {
                 Text(text = "Hello Splash")
-                LaunchedEffect(key1 = true){
+                LaunchedEffect(key1 = true) {
                     delay(3000)
-                    navController.navigate("main"){
-                        popUpTo("splash"){
+                    navController.navigate("main") {
+                        popUpTo("splash") {
                             inclusive = true
                         }
                     }
@@ -75,10 +68,10 @@ fun AppSplashScreen(navController: NavController){
 
 
 @Composable
-fun AppScreenNavigator(){
+fun AppScreenNavigator() {
     val navigateController = rememberNavController()
 
-    NavHost(navController = navigateController, startDestination = "splash"){
+    NavHost(navController = navigateController, startDestination = "splash") {
 
         composable("splash") {
             AppSplashScreen(navController = navigateController)
@@ -95,25 +88,25 @@ fun AppScreenNavigator(){
 @Composable
 fun AppContent() {
     val navController = rememberNavController()
-            Scaffold(
-                bottomBar = {
-                    BottomBarNavigation(navController)
-                }
-            ) {
-                NavHost(
-                    navController = navController,
-                    startDestination = BottomNavigationItem.Home.route
-                ) {
-                    composable(BottomNavigationItem.Home.route) {
-                        Home()
-                    }
-                    composable(BottomNavigationItem.CreateReel.route) {
-                        CreateReel()
-                    }
-                    composable(BottomNavigationItem.Profile.route) {
-                        Profile()
-                    }
-                }
+    Scaffold(
+        bottomBar = {
+            BottomBarNavigation(navController)
+        }
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = BottomNavigationItem.Home.route
+        ) {
+            composable(BottomNavigationItem.Home.route) {
+                Home()
+            }
+            composable(BottomNavigationItem.CreateReel.route) {
+                CreateReel()
+            }
+            composable(BottomNavigationItem.Profile.route) {
+                Profile()
+            }
+        }
     }
 }
 
