@@ -3,6 +3,7 @@ package com.curiozing.reels
 import android.annotation.SuppressLint
 import android.graphics.drawable.Icon
 import android.os.Bundle
+import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -21,9 +22,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -33,25 +36,64 @@ import com.curiozing.reels.composeUi.CreateReel
 import com.curiozing.reels.composeUi.Home
 import com.curiozing.reels.composeUi.Profile
 import com.curiozing.reels.ui.theme.ReelsTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppContent()
+            AppScreenNavigator()
         }
     }
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun AppContent() {
-    val navController = rememberNavController()
+fun AppSplashScreen(navController: NavController){
     ReelsTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                Text(text = "Hello Splash")
+                LaunchedEffect(key1 = true){
+                    delay(3000)
+                    navController.navigate("main"){
+                        popUpTo(navController.graph.startDestinationId)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun AppScreenNavigator(){
+    val navigateController = rememberNavController()
+
+    NavHost(navController = navigateController, startDestination = "splash"){
+
+        composable("splash") {
+            AppSplashScreen(navController = navigateController)
+        }
+
+        composable("main") {
+            AppContent()
+        }
+    }
+}
+
+
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Composable
+fun AppContent() {
+    val navController = rememberNavController()
+
             Scaffold(
                 bottomBar = {
                     BottomBarNavigation(navController)
@@ -71,9 +113,6 @@ fun AppContent() {
                         Profile()
                     }
                 }
-            }
-
-        }
     }
 }
 
