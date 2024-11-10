@@ -1,9 +1,12 @@
 package com.curiozing.reels
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.BottomNavigation
@@ -20,8 +23,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -37,6 +45,7 @@ import kotlinx.coroutines.delay
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             ReelsTheme {
                 AppScreenNavigator()
@@ -50,8 +59,13 @@ class MainActivity : ComponentActivity() {
 fun AppSplashScreen(navController: NavController) {
         Surface(
             modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
         ) {
+            val context = LocalContext.current
+            val window = (context as ComponentActivity).window
+            WindowCompat.setDecorFitsSystemWindows(window,false)
+            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+
             Column(modifier = Modifier.fillMaxSize()) {
                 Text(text = "Hello Splash")
                 LaunchedEffect(key1 = true) {
@@ -69,6 +83,7 @@ fun AppSplashScreen(navController: NavController) {
 
 @Composable
 fun AppScreenNavigator() {
+
     val navigateController = rememberNavController()
 
     NavHost(navController = navigateController, startDestination = "splash") {
@@ -88,23 +103,37 @@ fun AppScreenNavigator() {
 @Composable
 fun AppContent() {
     val navController = rememberNavController()
-    Scaffold(
-        bottomBar = {
-            BottomBarNavigation(navController)
-        }
-    ) {
-        NavHost(
-            navController = navController,
-            startDestination = BottomNavigationItem.Home.route
+    Surface {
+        val context = LocalContext.current
+        val view = LocalView.current
+
+        val window = (context as ComponentActivity).window
+        window.statusBarColor = Color(0xFFFFFFFF).toArgb()
+        WindowCompat.setDecorFitsSystemWindows(window,true)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+
+        WindowCompat.getInsetsController(window,view).isAppearanceLightStatusBars = true
+        WindowCompat.getInsetsController(window,view).isAppearanceLightNavigationBars = true
+
+
+        Scaffold(
+            bottomBar = {
+                BottomBarNavigation(navController)
+            }
         ) {
-            composable(BottomNavigationItem.Home.route) {
-                Home()
-            }
-            composable(BottomNavigationItem.CreateReel.route) {
-                CreateReel()
-            }
-            composable(BottomNavigationItem.Profile.route) {
-                Profile()
+            NavHost(
+                navController = navController,
+                startDestination = BottomNavigationItem.Home.route
+            ) {
+                composable(BottomNavigationItem.Home.route) {
+                    Home()
+                }
+                composable(BottomNavigationItem.CreateReel.route) {
+                    CreateReel()
+                }
+                composable(BottomNavigationItem.Profile.route) {
+                    Profile()
+                }
             }
         }
     }
