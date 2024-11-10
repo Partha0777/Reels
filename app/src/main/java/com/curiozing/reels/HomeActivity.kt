@@ -95,7 +95,6 @@ fun AppScreenNavigator(){
 @Composable
 fun AppContent() {
     val navController = rememberNavController()
-
             Scaffold(
                 bottomBar = {
                     BottomBarNavigation(navController)
