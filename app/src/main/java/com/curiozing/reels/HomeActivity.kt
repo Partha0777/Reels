@@ -82,10 +82,8 @@ fun AppSplashScreen(navController: NavController) {
     }
 }
 
-
 @Composable
 fun AppScreenNavigator() {
-
     val navigateController = rememberNavController()
 
     NavHost(navController = navigateController, startDestination = "splash") {
@@ -99,7 +97,6 @@ fun AppScreenNavigator() {
         }
     }
 }
-
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -150,7 +147,6 @@ fun BottomBarNavigation(navController: NavHostController) {
         BottomNavigationItem.Profile,
     )
     val currentScreen = navController.currentBackStackEntryAsState().value?.destination
-
     BottomNavigation(
         backgroundColor = MaterialTheme.colorScheme.primary
     ) {
