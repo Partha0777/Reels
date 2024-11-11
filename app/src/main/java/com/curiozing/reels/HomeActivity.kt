@@ -57,27 +57,29 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun AppSplashScreen(navController: NavController) {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            val context = LocalContext.current
-            val window = (context as ComponentActivity).window
-            WindowCompat.setDecorFitsSystemWindows(window,false)
-            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        val context = LocalContext.current
+        val window = (context as ComponentActivity).window
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
 
-            Column(modifier = Modifier.fillMaxSize()) {
-                Text(text = "Hello Splash")
-                LaunchedEffect(key1 = true) {
-                    delay(3000)
-                    navController.navigate("main") {
-                        popUpTo("splash") {
-                            inclusive = true
-                        }
+        Column(modifier = Modifier.fillMaxSize()) {
+            Text(text = "Hello Splash")
+            LaunchedEffect(key1 = true) {
+                delay(3000)
+                navController.navigate("main") {
+                    popUpTo("splash") {
+                        inclusive = true
                     }
                 }
             }
         }
+    }
 }
 
 
@@ -109,11 +111,11 @@ fun AppContent() {
 
         val window = (context as ComponentActivity).window
         window.statusBarColor = Color(0xFFFFFFFF).toArgb()
-        WindowCompat.setDecorFitsSystemWindows(window,true)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
         window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
-        WindowCompat.getInsetsController(window,view).isAppearanceLightStatusBars = true
-        WindowCompat.getInsetsController(window,view).isAppearanceLightNavigationBars = true
+        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
+        WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = true
 
 
         Scaffold(
