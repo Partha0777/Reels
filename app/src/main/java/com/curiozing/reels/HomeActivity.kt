@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
@@ -29,6 +30,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -147,6 +149,7 @@ fun BottomBarNavigation(navController: NavHostController) {
     )
     val currentScreen = navController.currentBackStackEntryAsState().value?.destination
     BottomNavigation(
+        modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
         backgroundColor = MaterialTheme.colorScheme.primary
     ) {
         bottomItems.forEach {
