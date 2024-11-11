@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
@@ -148,25 +150,29 @@ fun BottomBarNavigation(navController: NavHostController) {
         BottomNavigationItem.Profile,
     )
     val currentScreen = navController.currentBackStackEntryAsState().value?.destination
-    BottomNavigation(
-        modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
-        backgroundColor = MaterialTheme.colorScheme.primary
-    ) {
-        bottomItems.forEach {
-            BottomNavigationItem(
-                selected = it.route == currentScreen?.route,
-                onClick = {
-                    navController.navigate(it.route) {
-                        popUpTo(navController.graph.startDestinationId) {
-                            saveState = true
+    Box (
+        Modifier.background(color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(20.dp)),
+    ){
+        BottomNavigation(
+            modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
+            backgroundColor = MaterialTheme.colorScheme.primary
+        ) {
+            bottomItems.forEach {
+                BottomNavigationItem(
+                    selected = it.route == currentScreen?.route,
+                    onClick = {
+                        navController.navigate(it.route) {
+                            popUpTo(navController.graph.startDestinationId) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                },
-                icon = {
-                    Icon(imageVector = it.icon, contentDescription = "")
-                })
+                    },
+                    icon = {
+                        Icon(imageVector = it.icon, contentDescription = "")
+                    })
+            }
         }
     }
 }
