@@ -178,7 +178,7 @@ fun BottomBarNavigation(navController: NavHostController) {
                         Icon(
                             painter = painterResource(id = it.icon),
                             contentDescription = "",
-                            modifier = Modifier.size(32.dp)
+                            modifier = Modifier.size(30.dp)
                         )
                     })
             }
