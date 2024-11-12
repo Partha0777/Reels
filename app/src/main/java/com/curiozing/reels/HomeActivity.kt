@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
@@ -156,7 +157,9 @@ fun BottomBarNavigation(navController: NavHostController) {
        // Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp).background(color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(50.dp)),
     ){
         BottomNavigation(
-            modifier = Modifier.padding(horizontal = 18.dp, vertical = 18.dp).clip(RoundedCornerShape(80)),
+            modifier = Modifier
+                .padding(horizontal = 18.dp, vertical = 18.dp)
+                .clip(RoundedCornerShape(80)),
             backgroundColor = MaterialTheme.colorScheme.primary
         ) {
             bottomItems.forEach {
@@ -172,7 +175,7 @@ fun BottomBarNavigation(navController: NavHostController) {
                         }
                     },
                     icon = {
-                        Icon(imageVector = it.icon, contentDescription = "", modifier = Modifier.size(32.dp))
+                        Icon(painter = painterResource(id = it.icon), contentDescription = "", modifier = Modifier.size(32.dp))
                     })
             }
         }
@@ -180,10 +183,10 @@ fun BottomBarNavigation(navController: NavHostController) {
 }
 
 
-sealed class BottomNavigationItem(val name: String, val route: String, val icon: ImageVector) {
-    data object Home : BottomNavigationItem("Home", "home", Icons.Default.Home)
-    data object CreateReel : BottomNavigationItem("Create", "createReels", Icons.Default.PlayArrow)
-    data object Profile : BottomNavigationItem("Profile", "profile", Icons.Default.Person)
+sealed class BottomNavigationItem(val name: String, val route: String, val icon: Int) {
+    data object Home : BottomNavigationItem("Home", "home", R.drawable.home_icon)
+    data object CreateReel : BottomNavigationItem("Create", "createReels", R.drawable.video_recording_icon)
+    data object Profile : BottomNavigationItem("Profile", "profile", R.drawable.profile_icon)
 }
 
 
