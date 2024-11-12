@@ -46,6 +46,7 @@ import androidx.navigation.compose.rememberNavController
 import com.curiozing.reels.composeUi.CreateReel
 import com.curiozing.reels.composeUi.Home
 import com.curiozing.reels.composeUi.Profile
+import com.curiozing.reels.ui.theme.ContentColor
 import com.curiozing.reels.ui.theme.ReelsTheme
 import kotlinx.coroutines.delay
 
@@ -178,7 +179,8 @@ fun BottomBarNavigation(navController: NavHostController) {
                         Icon(
                             painter = painterResource(id = it.icon),
                             contentDescription = "",
-                            modifier = Modifier.size(30.dp)
+                            modifier = Modifier.size(30.dp),
+                            tint = ContentColor
                         )
                     })
             }
