@@ -153,9 +153,9 @@ fun BottomBarNavigation(navController: NavHostController) {
         BottomNavigationItem.Profile,
     )
     val currentScreen = navController.currentBackStackEntryAsState().value?.destination
-    Box (
-       // Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp).background(color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(50.dp)),
-    ){
+    Box(
+        // Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp).background(color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(50.dp)),
+    ) {
         BottomNavigation(
             modifier = Modifier
                 .padding(horizontal = 18.dp, vertical = 18.dp)
@@ -175,7 +175,11 @@ fun BottomBarNavigation(navController: NavHostController) {
                         }
                     },
                     icon = {
-                        Icon(painter = painterResource(id = it.icon), contentDescription = "", modifier = Modifier.size(32.dp))
+                        Icon(
+                            painter = painterResource(id = it.icon),
+                            contentDescription = "",
+                            modifier = Modifier.size(32.dp)
+                        )
                     })
             }
         }
@@ -185,7 +189,9 @@ fun BottomBarNavigation(navController: NavHostController) {
 
 sealed class BottomNavigationItem(val name: String, val route: String, val icon: Int) {
     data object Home : BottomNavigationItem("Home", "home", R.drawable.home_icon)
-    data object CreateReel : BottomNavigationItem("Create", "createReels", R.drawable.video_recording_icon)
+    data object CreateReel :
+        BottomNavigationItem("Create", "createReels", R.drawable.video_recording_icon)
+
     data object Profile : BottomNavigationItem("Profile", "profile", R.drawable.profile_icon)
 }
 
