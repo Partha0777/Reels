@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -151,10 +152,10 @@ fun BottomBarNavigation(navController: NavHostController) {
     )
     val currentScreen = navController.currentBackStackEntryAsState().value?.destination
     Box (
-        Modifier.background(color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(20.dp)),
+       // Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp).background(color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(50.dp)),
     ){
         BottomNavigation(
-            modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
+            modifier = Modifier.padding(horizontal = 18.dp, vertical = 18.dp).clip(RoundedCornerShape(80)),
             backgroundColor = MaterialTheme.colorScheme.primary
         ) {
             bottomItems.forEach {
