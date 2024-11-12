@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -171,7 +172,7 @@ fun BottomBarNavigation(navController: NavHostController) {
                         }
                     },
                     icon = {
-                        Icon(imageVector = it.icon, contentDescription = "")
+                        Icon(imageVector = it.icon, contentDescription = "", modifier = Modifier.size(32.dp))
                     })
             }
         }
