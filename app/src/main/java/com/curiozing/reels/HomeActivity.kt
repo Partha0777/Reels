@@ -61,7 +61,6 @@ import java.nio.charset.StandardCharsets
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val job = CoroutineScope(Dispatchers.IO)
         job.launch {
             val  data = ApiService.reelsAPI.getReels().await()
