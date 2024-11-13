@@ -52,8 +52,11 @@ import com.curiozing.reels.ui.theme.ContentColor
 import com.curiozing.reels.ui.theme.ReelsTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
+import java.nio.charset.StandardCharsets
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,8 +64,19 @@ class MainActivity : ComponentActivity() {
 
         val job = CoroutineScope(Dispatchers.IO)
         job.launch {
-            val data = ApiService.reelsAPI.getReels().execute()
-            data.body()?.let { Log.d("Reels --> ", it.string()) }
+            val  data = ApiService.reelsAPI.getReels().await()
+            println("Full Response Body: ${data}")
+
+           /* if(data.body() != null && data.isSuccessful){
+                val source = data.body()!!.source()
+                source.request(Long.MAX_VALUE)
+                val buffer = source.buffer
+                val rawResponse = buffer.clone().readString(StandardCharsets.UTF_8) // Clone the buffer to read multiple times
+                println("Full Response Body: $rawResponse")
+            }else{
+                Log.d("Reels --> ${data.message()}","")
+
+            }*/
 
         }
         setContent {
