@@ -4,6 +4,8 @@ import com.curiozing.reels.AppKeysAndBaseUrl
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -11,7 +13,7 @@ import retrofit2.http.GET
 object ApiService {
     private var retrofitClient: Retrofit? = null
 
-    fun getRetrofitClient() : Retrofit {
+    private fun getRetrofitClient() : Retrofit {
         return if(retrofitClient != null){
             retrofitClient as Retrofit
         }else{
@@ -21,11 +23,11 @@ object ApiService {
         }
     }
 
-    val reelsAPI = getRetrofitClient().create(ReelsAPI::class.java)
+    val reelsAPI: ReelsAPI = getRetrofitClient().create(ReelsAPI::class.java)
 }
 
 interface ReelsAPI{
 
-    @GET("/data/reels")
-    fun getReels() : Response
+    @GET("/data/reels.json")
+    fun getReels() : Call<ResponseBody>
 }

@@ -3,6 +3,7 @@ package com.curiozing.reels
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -46,13 +47,24 @@ import androidx.navigation.compose.rememberNavController
 import com.curiozing.reels.composeUi.CreateReel
 import com.curiozing.reels.composeUi.Home
 import com.curiozing.reels.composeUi.Profile
+import com.curiozing.reels.data.api.ApiService
 import com.curiozing.reels.ui.theme.ContentColor
 import com.curiozing.reels.ui.theme.ReelsTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val job = CoroutineScope(Dispatchers.IO)
+        job.launch {
+            val data = ApiService.reelsAPI.getReels().execute()
+            data.body()?.let { Log.d("Reels --> ", it.string()) }
+
+        }
         setContent {
             ReelsTheme {
                 AppScreenNavigator()
