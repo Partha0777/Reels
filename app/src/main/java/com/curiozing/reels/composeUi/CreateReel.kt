@@ -6,5 +6,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun CreateReel() {
-    Text(text = "Create Reel")
+
 }
