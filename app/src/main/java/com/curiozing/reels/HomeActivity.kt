@@ -66,18 +66,6 @@ class MainActivity : ComponentActivity() {
         job.launch {
             val  data = ApiService.reelsAPI.getReels().await()
             println("Full Response Body: ${data}")
-
-           /* if(data.body() != null && data.isSuccessful){
-                val source = data.body()!!.source()
-                source.request(Long.MAX_VALUE)
-                val buffer = source.buffer
-                val rawResponse = buffer.clone().readString(StandardCharsets.UTF_8) // Clone the buffer to read multiple times
-                println("Full Response Body: $rawResponse")
-            }else{
-                Log.d("Reels --> ${data.message()}","")
-
-            }*/
-
         }
         setContent {
             ReelsTheme {
