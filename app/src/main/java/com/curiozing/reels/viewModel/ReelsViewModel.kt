@@ -8,14 +8,16 @@ import androidx.lifecycle.viewModelScope
 import com.curiozing.reels.data.api.ApiService
 import com.curiozing.reels.model.reels.Reels
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ReelsViewModel : ViewModel() {
 
-    private var _reenlist:MutableState<List<Reels>> = mutableStateOf(listOf())
+    private var _reenlist: MutableStateFlow<List<Reels>> = MutableStateFlow(listOf())
 
-    var reels: State<List<Reels>> = _reenlist
+    var reels: StateFlow<List<Reels>> = _reenlist
 
     init {
         getReelsList()
