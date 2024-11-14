@@ -1,6 +1,7 @@
 package com.curiozing.reels.data.api
 
 import com.curiozing.reels.AppKeysAndBaseUrl
+import com.curiozing.reels.model.reels.Reels
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
@@ -32,5 +33,5 @@ object ApiService {
 interface ReelsAPI{
 
     @GET("/data/reels.json")
-    fun getReels() : Deferred<ResponseBody>
+    fun getReels() : Deferred<List<Reels>>
 }
