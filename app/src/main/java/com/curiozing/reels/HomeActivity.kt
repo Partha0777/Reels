@@ -122,10 +122,12 @@ fun AppContent() {
         val view = LocalView.current
 
         val window = (context as ComponentActivity).window
-        window.statusBarColor = Color(0xFFFFFFFF).toArgb()
-        WindowCompat.setDecorFitsSystemWindows(window, true)
-        window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
+        window.statusBarColor = Color.Transparent.toArgb()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
         WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
         WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = true
 
