@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
@@ -37,15 +38,21 @@ import kotlin.random.Random
 
 @Composable
 fun CreateReel() {
+    val configuration = LocalConfiguration
+    val density = LocalDensity.current
 
     val reelsViewModel: ReelsViewModel = viewModel()
     val reelsList =  reelsViewModel.reels.collectAsState()
-    var containerHeight by remember { mutableStateOf(1) }
-    val configuration = LocalConfiguration
+
     val reelItemHeight = configuration.current.screenHeightDp / 2.5
+
+    val reelItemHeightInPx = with(density){
+        reelItemHeight.dp.toPx()
+    }
 
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         if (reelsList.value.isNotEmpty()){
+            println("reelItemHeight $reelItemHeightInPx")
             LazyVerticalGrid(columns = GridCells.Fixed(2),
                 content = {
                     reelsList.value.forEachIndexed {index,reel ->
@@ -67,7 +74,6 @@ fun CreateReel() {
                                     Box(
                                         modifier = Modifier
                                             .fillMaxWidth().height(reelItemHeight.dp)
-                                            .onSizeChanged { size -> containerHeight = size.height }
                                             .background(
                                                 Brush.verticalGradient(
                                                     colors = listOf(
@@ -78,7 +84,7 @@ fun CreateReel() {
                                                         Color.Black.copy(alpha = 1f)
                                                     ),
                                                     startY = 0f, // Start from the top
-                                                    endY = containerHeight.toFloat() // Dynamic height
+                                                    endY = reelItemHeightInPx // Dynamic height
                                                 )
                                             )
                                     )
