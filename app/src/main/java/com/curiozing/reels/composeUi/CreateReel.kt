@@ -13,7 +13,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
+import com.curiozing.reels.AppKeysAndBaseUrl.IMAGE_BASE_URL
 import com.curiozing.reels.viewModel.ReelsViewModel
+import kotlin.random.Random
 
 
 @Composable
@@ -27,11 +30,12 @@ fun CreateReel() {
         if (reelsList.value.isNotEmpty()){
             LazyVerticalGrid(columns = GridCells.Fixed(2),
                 content = {
-                    reelsList.value.forEach {reel ->
+                    reelsList.value.forEachIndexed {index,reel ->
+                        val randomInt = Random.nextInt(200, 500)
                         item {
                             Column {
-
-                                Text(text = reel.descriptions)
+                                AsyncImage(model = "$IMAGE_BASE_URL$randomInt/540/960", contentDescription = "reel image")
+                              //  Text(text = reel.descriptions)
                             }
                         }
                     }
