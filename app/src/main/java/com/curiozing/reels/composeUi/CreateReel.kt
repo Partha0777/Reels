@@ -1,5 +1,6 @@
 package com.curiozing.reels.composeUi
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,6 +30,7 @@ fun CreateReel() {
                     reelsList.value.forEach {reel ->
                         item {
                             Column {
+
                                 Text(text = reel.descriptions)
                             }
                         }
