@@ -42,20 +42,24 @@ fun CreateReel() {
     val density = LocalDensity.current
 
     val reelsViewModel: ReelsViewModel = viewModel()
-    val reelsList =  reelsViewModel.reels.collectAsState()
+    val reelsList = reelsViewModel.reels.collectAsState()
 
     val reelItemHeight = configuration.current.screenHeightDp / 2.5
 
-    val reelItemHeightInPx = with(density){
+    val reelItemHeightInPx = with(density) {
         reelItemHeight.dp.toPx()
     }
 
-    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-        if (reelsList.value.isNotEmpty()){
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        if (reelsList.value.isNotEmpty()) {
             println("reelItemHeight $reelItemHeightInPx")
             LazyVerticalGrid(columns = GridCells.Fixed(2),
                 content = {
-                    reelsList.value.forEachIndexed {index,reel ->
+                    reelsList.value.forEachIndexed { index, reel ->
                         val randomInt = Random.nextInt(200, 500)
                         item {
                             Column {
@@ -68,12 +72,15 @@ fun CreateReel() {
                                         model = "$IMAGE_BASE_URL$randomInt/540/960",
                                         contentDescription = "reel image",
                                         contentScale = ContentScale.FillWidth,
-                                        modifier = Modifier.fillMaxWidth().height(reelItemHeight.dp)
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(reelItemHeight.dp)
                                     )
 
                                     Box(
                                         modifier = Modifier
-                                            .fillMaxWidth().height(reelItemHeight.dp)
+                                            .fillMaxWidth()
+                                            .height(reelItemHeight.dp)
                                             .background(
                                                 Brush.verticalGradient(
                                                     colors = listOf(
@@ -95,7 +102,7 @@ fun CreateReel() {
                         }
                     }
                 })
-        }else{
+        } else {
             CircularProgressIndicator()
         }
     }
