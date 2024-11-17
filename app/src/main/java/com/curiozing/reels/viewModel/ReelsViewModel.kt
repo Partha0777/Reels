@@ -20,9 +20,9 @@ class ReelsViewModel : ViewModel() {
         getReelsList()
     }
 
-    private fun getReelsList(){
+    private fun getReelsList() {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 val reelsData = ApiService.reelsAPI.getReels().await()
                 _reenlist.value = reelsData
             }
