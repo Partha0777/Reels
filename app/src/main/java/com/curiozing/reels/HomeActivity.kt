@@ -88,7 +88,11 @@ fun AppSplashScreen(navController: NavController) {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
 
-        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             LaunchedEffect(key1 = true) {
                 delay(3000)
                 navController.navigate("main") {
@@ -97,8 +101,10 @@ fun AppSplashScreen(navController: NavController) {
                     }
                 }
             }
-            Text(text = "Reels",
-                style = TextStyle(fontWeight = FontWeight.ExtraBold, fontSize = 18.sp))
+            Text(
+                text = "Reels",
+                style = TextStyle(fontWeight = FontWeight.ExtraBold, fontSize = 18.sp)
+            )
         }
     }
 }
