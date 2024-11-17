@@ -13,7 +13,6 @@ import kotlinx.coroutines.withContext
 class ReelsViewModel : ViewModel() {
 
     private var _reenlist: MutableStateFlow<List<Reels>> = MutableStateFlow(listOf())
-
     var reels: StateFlow<List<Reels>> = _reenlist
 
     init {
