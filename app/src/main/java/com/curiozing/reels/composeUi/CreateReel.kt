@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -100,12 +101,16 @@ fun CreateReel() {
                                             ),
                                         contentAlignment = Alignment.BottomStart
                                     ) {
-                                        Row {
+
+                                        Row(
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(start = 12.dp, end = 12.dp),
+                                            horizontalArrangement = Arrangement.SpaceBetween
+                                        ) {
                                             Row(
                                                 verticalAlignment = Alignment.CenterVertically,
                                                 modifier = Modifier.padding(
-                                                    start = 12.dp,
-                                                    end = 12.dp,
                                                     top = 6.dp,
                                                     bottom = 12.dp
                                                 )
@@ -113,7 +118,7 @@ fun CreateReel() {
                                                 Icon(
                                                     imageVector = Icons.Default.FavoriteBorder,
                                                     contentDescription = "",
-                                                    tint = MaterialTheme.colorScheme.primary,
+                                                    tint = Color.White,
                                                     modifier = Modifier.size(18.dp)
                                                 )
                                                 Spacer(modifier = Modifier.width(4.dp))
@@ -126,8 +131,6 @@ fun CreateReel() {
                                             Row(
                                                 verticalAlignment = Alignment.CenterVertically,
                                                 modifier = Modifier.padding(
-                                                    start = 12.dp,
-                                                    end = 12.dp,
                                                     top = 6.dp,
                                                     bottom = 12.dp
                                                 )
@@ -135,12 +138,32 @@ fun CreateReel() {
                                                 Icon(
                                                     imageVector = Icons.Default.MailOutline,
                                                     contentDescription = "",
-                                                    tint = MaterialTheme.colorScheme.primary,
+                                                    tint = Color.White,
                                                     modifier = Modifier.size(18.dp)
                                                 )
                                                 Spacer(modifier = Modifier.width(4.dp))
                                                 Text(
                                                     text = reel.userInteractions.commentsCount.toString(),
+                                                    fontSize = 12.sp,
+                                                    color = Color.White
+                                                )
+                                            }
+                                            Row(
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                modifier = Modifier.padding(
+                                                    top = 6.dp,
+                                                    bottom = 12.dp
+                                                )
+                                            ) {
+                                                Icon(
+                                                    imageVector = Icons.Default.Share,
+                                                    contentDescription = "",
+                                                    tint = Color.White,
+                                                    modifier = Modifier.size(18.dp)
+                                                )
+                                                Spacer(modifier = Modifier.width(4.dp))
+                                                Text(
+                                                    text = reel.userInteractions.shareCount.toString(),
                                                     fontSize = 12.sp,
                                                     color = Color.White
                                                 )
