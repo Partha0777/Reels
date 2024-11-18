@@ -89,7 +89,7 @@ fun CreateReel() {
                                                     colors = listOf(
                                                         Color.Transparent,
                                                         Color.Black.copy(alpha = 0.1f),
-                                                        Color.Black.copy(alpha = 0.4f),
+                                                        Color.Black.copy(alpha = 0.5f),
                                                         Color.Black.copy(alpha = 0.7f),
                                                         Color.Black.copy(alpha = 9f)
                                                     ),
@@ -127,7 +127,7 @@ fun CreateReel() {
                                                     Spacer(modifier = Modifier.width(4.dp))
                                                     Text(
                                                         text = reel.userInteractions.likeCount.toString(),
-                                                        fontSize = 12.sp,
+                                                        fontSize = 14.sp,
                                                         color = Color.White
                                                     )
                                                 }
@@ -147,7 +147,7 @@ fun CreateReel() {
                                                     Spacer(modifier = Modifier.width(4.dp))
                                                     Text(
                                                         text = reel.userInteractions.commentsCount.toString(),
-                                                        fontSize = 12.sp,
+                                                        fontSize = 14.sp,
                                                         color = Color.White
                                                     )
                                                 }
@@ -167,7 +167,7 @@ fun CreateReel() {
                                                     Spacer(modifier = Modifier.width(4.dp))
                                                     Text(
                                                         text = reel.userInteractions.shareCount.toString(),
-                                                        fontSize = 12.sp,
+                                                        fontSize = 14.sp,
                                                         color = Color.White
                                                     )
                                                 }
