@@ -98,13 +98,28 @@ fun CreateReel() {
                                                 )
                                             ),
                                         contentAlignment = Alignment.BottomStart
-                                    ){
+                                    ) {
                                         Row(
                                             verticalAlignment = Alignment.CenterVertically,
-                                            modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 6.dp, bottom = 12.dp)) {
-                                            Icon(imageVector = Icons.Default.FavoriteBorder, contentDescription = "", tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
+                                            modifier = Modifier.padding(
+                                                start = 12.dp,
+                                                end = 12.dp,
+                                                top = 6.dp,
+                                                bottom = 12.dp
+                                            )
+                                        ) {
+                                            Icon(
+                                                imageVector = Icons.Default.FavoriteBorder,
+                                                contentDescription = "",
+                                                tint = MaterialTheme.colorScheme.primary,
+                                                modifier = Modifier.size(20.dp)
+                                            )
                                             Spacer(modifier = Modifier.width(4.dp))
-                                            Text(text = reel.userInteractions.likeCount.toString(), fontSize = 16.sp, color = Color.White)
+                                            Text(
+                                                text = reel.userInteractions.likeCount.toString(),
+                                                fontSize = 16.sp,
+                                                color = Color.White
+                                            )
                                         }
                                     }
                                 }
