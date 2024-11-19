@@ -57,7 +57,6 @@ fun CreateReel() {
         verticalArrangement = Arrangement.Center
     ) {
         if (reelsList.value.isNotEmpty()) {
-            println("reelItemHeight $reelItemHeightInPx")
             LazyVerticalGrid(columns = GridCells.Fixed(2),
                 content = {
                     reelsList.value.forEachIndexed { index, reel ->
@@ -68,7 +67,6 @@ fun CreateReel() {
                                 Box(
                                     modifier = Modifier.fillMaxSize()
                                 ) {
-
                                     AsyncImage(
                                         model = "$IMAGE_BASE_URL$randomInt/540/960",
                                         contentDescription = "reel image",
@@ -91,8 +89,8 @@ fun CreateReel() {
                                                         Color.Black.copy(alpha = 0.7f),
                                                         Color.Black.copy(alpha = 9f)
                                                     ),
-                                                    startY = 0f, // Start from the top
-                                                    endY = reelItemHeightInPx // Dynamic height
+                                                    startY = 0f,
+                                                    endY = reelItemHeightInPx
                                                 )
                                             ),
                                         contentAlignment = Alignment.BottomStart
