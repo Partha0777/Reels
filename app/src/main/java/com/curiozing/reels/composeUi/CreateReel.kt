@@ -37,6 +37,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.curiozing.reels.AppKeysAndBaseUrl.IMAGE_BASE_URL
 import com.curiozing.reels.R
+import com.curiozing.reels.model.reels.UserInteractions
 import com.curiozing.reels.viewModel.ReelsViewModel
 import kotlin.random.Random
 
@@ -106,77 +107,17 @@ fun CreateReel() {
                                                 lineHeight = 16.sp,
                                                 modifier = Modifier.padding(start = 12.dp),
                                                 fontSize = 12.sp, color = Color.White)
-                                            Spacer(modifier = Modifier.height(8.dp))
+                                            Spacer(modifier = Modifier.height(4.dp))
                                             Row(
                                                 modifier = Modifier
                                                     .fillMaxWidth()
                                                     .padding(start = 12.dp, end = 12.dp),
                                                 horizontalArrangement = Arrangement.SpaceBetween
                                             ) {
-                                                Row(
-                                                    verticalAlignment = Alignment.CenterVertically,
-                                                    modifier = Modifier.padding(
-                                                        top = 6.dp,
-                                                        bottom = 12.dp
-                                                    )
-                                                ) {
-                                                    Icon(
-                                                        painter = painterResource(id = R.drawable.like_icon),
-                                                        contentDescription = "",
-                                                        tint = Color.White,
-                                                        modifier = Modifier.size(16.dp)
-                                                    )
-                                                    Spacer(modifier = Modifier.width(6.dp))
-                                                    Text(
-                                                        text = reel.userInteractions.likeCount.toString(),
-                                                        fontSize = 14.sp,
-                                                        color = Color.White
-                                                    )
-                                                }
-                                                Row(
-                                                    verticalAlignment = Alignment.CenterVertically,
-                                                    modifier = Modifier.padding(
-                                                        top = 6.dp,
-                                                        bottom = 12.dp
-                                                    )
-                                                ) {
-                                                    Icon(
-                                                        painter = painterResource(id = R.drawable.comment_icon),
-                                                        contentDescription = "",
-                                                        tint = Color.White,
-                                                        modifier = Modifier.size(16.dp)
-                                                    )
-                                                    Spacer(modifier = Modifier.width(6.dp))
-                                                    Text(
-                                                        text = reel.userInteractions.commentsCount.toString(),
-                                                        fontSize = 14.sp,
-                                                        color = Color.White
-                                                    )
-                                                }
-                                                Row(
-                                                    verticalAlignment = Alignment.CenterVertically,
-                                                    modifier = Modifier.padding(
-                                                        top = 6.dp,
-                                                        bottom = 12.dp
-                                                    )
-                                                ) {
-                                                    Icon(
-                                                        painter = painterResource(id = R.drawable.share_icon),
-                                                        contentDescription = "",
-                                                        tint = Color.White,
-                                                        modifier = Modifier.size(16.dp)
-                                                    )
-                                                    Spacer(modifier = Modifier.width(6.dp))
-                                                    Text(
-                                                        text = reel.userInteractions.shareCount.toString(),
-                                                        fontSize = 14.sp,
-                                                        color = Color.White
-                                                    )
-                                                }
-
+                                                UserInteractionItem(iconId = R.drawable.like_icon, content = reel.userInteractions.likeCount.toString())
+                                                UserInteractionItem(iconId = R.drawable.comment_icon, content = reel.userInteractions.commentsCount.toString())
+                                                UserInteractionItem(iconId = R.drawable.share_icon, content = reel.userInteractions.shareCount.toString())
                                             }
-
-
                                         }
                                     }
                                 }
@@ -187,5 +128,29 @@ fun CreateReel() {
         } else {
             CircularProgressIndicator()
         }
+    }
+}
+
+@Composable
+fun UserInteractionItem(iconId:Int, content:String) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(
+            top = 6.dp,
+            bottom = 12.dp
+        )
+    ) {
+        Icon(
+            painter = painterResource(id = iconId),
+            contentDescription = "",
+            tint = Color.White,
+            modifier = Modifier.size(16.dp)
+        )
+        Spacer(modifier = Modifier.width(6.dp))
+        Text(
+            text = content,
+            fontSize = 14.sp,
+            color = Color.White
+        )
     }
 }
