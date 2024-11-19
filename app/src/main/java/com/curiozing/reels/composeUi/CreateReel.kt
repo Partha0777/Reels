@@ -30,11 +30,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.curiozing.reels.AppKeysAndBaseUrl.IMAGE_BASE_URL
+import com.curiozing.reels.R
 import com.curiozing.reels.viewModel.ReelsViewModel
 import kotlin.random.Random
 
@@ -119,12 +121,12 @@ fun CreateReel() {
                                                     )
                                                 ) {
                                                     Icon(
-                                                        imageVector = Icons.Default.FavoriteBorder,
+                                                        painter = painterResource(id = R.drawable.like_icon),
                                                         contentDescription = "",
                                                         tint = Color.White,
-                                                        modifier = Modifier.size(18.dp)
+                                                        modifier = Modifier.size(16.dp)
                                                     )
-                                                    Spacer(modifier = Modifier.width(4.dp))
+                                                    Spacer(modifier = Modifier.width(6.dp))
                                                     Text(
                                                         text = reel.userInteractions.likeCount.toString(),
                                                         fontSize = 14.sp,
@@ -139,12 +141,12 @@ fun CreateReel() {
                                                     )
                                                 ) {
                                                     Icon(
-                                                        imageVector = Icons.Default.MailOutline,
+                                                        painter = painterResource(id = R.drawable.comment_icon),
                                                         contentDescription = "",
                                                         tint = Color.White,
-                                                        modifier = Modifier.size(18.dp)
+                                                        modifier = Modifier.size(16.dp)
                                                     )
-                                                    Spacer(modifier = Modifier.width(4.dp))
+                                                    Spacer(modifier = Modifier.width(6.dp))
                                                     Text(
                                                         text = reel.userInteractions.commentsCount.toString(),
                                                         fontSize = 14.sp,
@@ -159,12 +161,12 @@ fun CreateReel() {
                                                     )
                                                 ) {
                                                     Icon(
-                                                        imageVector = Icons.Default.Share,
+                                                        painter = painterResource(id = R.drawable.share_icon),
                                                         contentDescription = "",
                                                         tint = Color.White,
-                                                        modifier = Modifier.size(18.dp)
+                                                        modifier = Modifier.size(16.dp)
                                                     )
-                                                    Spacer(modifier = Modifier.width(4.dp))
+                                                    Spacer(modifier = Modifier.width(6.dp))
                                                     Text(
                                                         text = reel.userInteractions.shareCount.toString(),
                                                         fontSize = 14.sp,
