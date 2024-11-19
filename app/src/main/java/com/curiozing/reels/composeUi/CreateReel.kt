@@ -103,10 +103,12 @@ fun CreateReel() {
                                         contentAlignment = Alignment.BottomStart
                                     ) {
                                         Column {
-                                            Text(text = reel.descriptions, maxLines = 2,
+                                            Text(
+                                                text = reel.descriptions, maxLines = 2,
                                                 lineHeight = 16.sp,
                                                 modifier = Modifier.padding(start = 12.dp),
-                                                fontSize = 12.sp, color = Color.White)
+                                                fontSize = 12.sp, color = Color.White
+                                            )
                                             Spacer(modifier = Modifier.height(4.dp))
                                             Row(
                                                 modifier = Modifier
@@ -114,9 +116,18 @@ fun CreateReel() {
                                                     .padding(start = 12.dp, end = 12.dp),
                                                 horizontalArrangement = Arrangement.SpaceBetween
                                             ) {
-                                                UserInteractionItem(iconId = R.drawable.like_icon, content = reel.userInteractions.likeCount.toString())
-                                                UserInteractionItem(iconId = R.drawable.comment_icon, content = reel.userInteractions.commentsCount.toString())
-                                                UserInteractionItem(iconId = R.drawable.share_icon, content = reel.userInteractions.shareCount.toString())
+                                                UserInteractionItem(
+                                                    iconId = R.drawable.like_icon,
+                                                    content = reel.userInteractions.likeCount.toString()
+                                                )
+                                                UserInteractionItem(
+                                                    iconId = R.drawable.comment_icon,
+                                                    content = reel.userInteractions.commentsCount.toString()
+                                                )
+                                                UserInteractionItem(
+                                                    iconId = R.drawable.share_icon,
+                                                    content = reel.userInteractions.shareCount.toString()
+                                                )
                                             }
                                         }
                                     }
@@ -132,7 +143,7 @@ fun CreateReel() {
 }
 
 @Composable
-fun UserInteractionItem(iconId:Int, content:String) {
+fun UserInteractionItem(iconId: Int, content: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(
