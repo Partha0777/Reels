@@ -116,7 +116,7 @@ fun AppScreenNavigator() {
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AppContent(mainNavigateController:NavController) {
+fun AppContent(mainNavigateController: NavController) {
     val navController = rememberNavController()
     Surface {
         val context = LocalContext.current
@@ -146,7 +146,7 @@ fun AppContent(mainNavigateController:NavController) {
                     Home()
                 }
                 composable(BottomNavigationItem.CreateReel.route) {
-                    MyReels{
+                    MyReels {
                         mainNavigateController.navigate("CreateReel")
                     }
                 }
