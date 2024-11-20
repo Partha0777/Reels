@@ -71,7 +71,11 @@ fun CreateReel() {
                     containerColor = MaterialTheme.colorScheme.primary,
                     shape = CircleShape,
                     onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Default.Add, contentDescription = "Create Reel", tint = Color.Black)
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Create Reel",
+                        tint = Color.Black
+                    )
                 }
             }
         }
