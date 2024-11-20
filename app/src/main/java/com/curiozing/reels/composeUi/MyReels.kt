@@ -46,7 +46,7 @@ import kotlin.random.Random
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MyReels() {
+fun MyReels(navigateTo: ()-> Unit) {
     val configuration = LocalConfiguration
     val density = LocalDensity.current
 
@@ -67,7 +67,9 @@ fun MyReels() {
                 FloatingActionButton(
                     containerColor = MaterialTheme.colorScheme.primary,
                     shape = CircleShape,
-                    onClick = { /*TODO*/ }) {
+                    onClick = {
+                        navigateTo.invoke()
+                    }) {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = "Create Reel",

@@ -41,6 +41,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.curiozing.reels.composeUi.CreateReel
 import com.curiozing.reels.composeUi.MyReels
 import com.curiozing.reels.composeUi.Home
 import com.curiozing.reels.composeUi.Profile
@@ -105,14 +106,17 @@ fun AppScreenNavigator() {
         }
 
         composable("main") {
-            AppContent()
+            AppContent(navigateController)
+        }
+        composable("CreateReel") {
+            CreateReel()
         }
     }
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun AppContent() {
+fun AppContent(mainNavigateController:NavController) {
     val navController = rememberNavController()
     Surface {
         val context = LocalContext.current
@@ -142,11 +146,14 @@ fun AppContent() {
                     Home()
                 }
                 composable(BottomNavigationItem.CreateReel.route) {
-                    MyReels()
+                    MyReels{
+                        mainNavigateController.navigate("CreateReel")
+                    }
                 }
                 composable(BottomNavigationItem.Profile.route) {
                     Profile()
                 }
+
             }
         }
     }
@@ -209,6 +216,6 @@ sealed class BottomNavigationItem(val name: String, val route: String, val icon:
 @Composable
 fun GreetingPreview() {
     ReelsTheme {
-        AppContent()
+        //AppContent()
     }
 }
