@@ -46,7 +46,7 @@ import kotlin.random.Random
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MyReels(navigateTo: ()-> Unit) {
+fun MyReels(navigateTo: () -> Unit) {
     val configuration = LocalConfiguration
     val density = LocalDensity.current
 
