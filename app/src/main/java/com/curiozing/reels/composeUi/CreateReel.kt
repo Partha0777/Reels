@@ -32,41 +32,51 @@ fun CreateReel() {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-       Row(
-           modifier = Modifier.fillMaxWidth(),
-           horizontalArrangement = Arrangement.SpaceEvenly
-       ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
 
-           Box(modifier = Modifier
-               .clip(shape = RoundedCornerShape(20))
-               .background(MaterialTheme.colorScheme.primary)
-               .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
-           ) {
-               Column(
-                   horizontalAlignment = Alignment.CenterHorizontally
-               ) {
-                   Icon(imageVector = Icons.Filled.PlayArrow, contentDescription = "", Modifier.size(50.dp))
-                   Spacer(modifier = Modifier.height(12.dp))
-                   Text(text = "Create Reel")
-               }
+            Box(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(20))
+                    .background(MaterialTheme.colorScheme.primary)
+                    .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.PlayArrow,
+                        contentDescription = "",
+                        Modifier.size(50.dp)
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(text = "Create Reel")
+                }
 
-           }
+            }
 
-           Box(modifier = Modifier
-               .clip(shape = RoundedCornerShape(20))
-               .background(MaterialTheme.colorScheme.primary)
-               .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
-           ) {
-               Column(
-                   horizontalAlignment = Alignment.CenterHorizontally
-               ) {
-                   Icon(imageVector = Icons.Filled.Add, contentDescription = "", Modifier.size(50.dp))
-                   Spacer(modifier = Modifier.height(12.dp))
-                   Text(text = "Create Post")
-               }
-           }
+            Box(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(20))
+                    .background(MaterialTheme.colorScheme.primary)
+                    .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Add,
+                        contentDescription = "",
+                        Modifier.size(50.dp)
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(text = "Create Post")
+                }
+            }
 
 
-       }
+        }
     }
 }
