@@ -53,7 +53,6 @@ fun CreateReel() {
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(text = "Create Reel")
                 }
-
             }
 
             Box(
