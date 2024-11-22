@@ -73,8 +73,6 @@ fun CreateReel() {
                     Text(text = "Create Post")
                 }
             }
-
-
         }
     }
 }
