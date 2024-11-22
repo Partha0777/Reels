@@ -64,7 +64,6 @@ fun CreateReel() {
                     Text(text = "Create Reel")
                 }
             }
-
             Box(
                 modifier = Modifier
                     .clip(shape = RoundedCornerShape(20))
