@@ -1,6 +1,7 @@
 package com.curiozing.reels.composeUi
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,6 +42,9 @@ fun CreateReel() {
                     .clip(shape = RoundedCornerShape(20))
                     .background(MaterialTheme.colorScheme.primary)
                     .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+                    .clickable {
+
+                    }
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -60,6 +64,9 @@ fun CreateReel() {
                     .clip(shape = RoundedCornerShape(20))
                     .background(MaterialTheme.colorScheme.primary)
                     .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+                    .clickable {
+
+                    }
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
