@@ -18,7 +18,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.ripple
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -49,7 +48,7 @@ fun CreateReel() {
                     .clickable(onClick = {},
                         indication = ripple(bounded = true, color = Color.Gray),
                         interactionSource = remember { MutableInteractionSource() }
-                        )
+                    )
                     .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
 
             ) {
