@@ -32,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -114,6 +115,17 @@ fun ReelsGrid(reelsList:List<Reels>,reelItemHeight:Double,reelItemHeightInPx:Flo
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+
+                    Box(modifier = Modifier
+                        .size(100.dp)
+                        .clip(shape = CircleShape)
+                        .background(color = MaterialTheme.colorScheme.primary)){
+                        AsyncImage(
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop,
+                            model ="https://www.catholicsingles.com/wp-content/uploads/2020/06/blog-header-3.png", contentDescription = "")
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "Your Posts!")
                 }
             }
