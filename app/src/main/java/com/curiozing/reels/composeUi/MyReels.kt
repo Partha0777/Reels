@@ -84,7 +84,7 @@ fun MyReels(navigateTo: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
 
-        ) {
+            ) {
 
             if (reelsList.value.isNotEmpty()) {
                 LazyVerticalGrid(columns = GridCells.Fixed(2),
