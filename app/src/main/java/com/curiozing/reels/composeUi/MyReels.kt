@@ -39,6 +39,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -111,7 +112,7 @@ fun ReelsGrid(reelsList:List<Reels>,reelItemHeight:Double,reelItemHeightInPx:Flo
             item(span = { GridItemSpan(maxLineSpan) }) {
                 Column(
                     modifier = Modifier
-                        .padding(top = 20.dp, bottom = 20.dp)
+                        .padding(top = 20.dp, bottom = 8.dp)
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -126,7 +127,12 @@ fun ReelsGrid(reelsList:List<Reels>,reelItemHeight:Double,reelItemHeightInPx:Flo
                             model ="https://www.catholicsingles.com/wp-content/uploads/2020/06/blog-header-3.png", contentDescription = "")
                     }
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = "Your Posts!")
+                    Text(text = "Partha R", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(modifier = Modifier.fillMaxWidth().padding(start = 12.dp, end = 12.dp)) {
+                        Text(text = "Your Posts!", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                    }
                 }
             }
 
