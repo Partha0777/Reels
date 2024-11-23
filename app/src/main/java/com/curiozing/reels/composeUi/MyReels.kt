@@ -87,7 +87,7 @@ fun MyReels(navigateTo: () -> Unit) {
         }
     ) {
         if (reelsList.value.isNotEmpty()) {
-            ReelsGrid(reelsList.value,reelItemHeight,reelItemHeightInPx)
+            ReelsGrid(reelsList.value, reelItemHeight, reelItemHeightInPx)
         } else {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -103,7 +103,7 @@ fun MyReels(navigateTo: () -> Unit) {
 }
 
 @Composable
-fun ReelsGrid(reelsList:List<Reels>,reelItemHeight:Double,reelItemHeightInPx:Float){
+fun ReelsGrid(reelsList: List<Reels>, reelItemHeight: Double, reelItemHeightInPx: Float) {
 
 
     LazyVerticalGrid(columns = GridCells.Fixed(2),
@@ -117,20 +117,26 @@ fun ReelsGrid(reelsList:List<Reels>,reelItemHeight:Double,reelItemHeightInPx:Flo
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
-                    Box(modifier = Modifier
-                        .size(100.dp)
-                        .clip(shape = CircleShape)
-                        .background(color = MaterialTheme.colorScheme.primary)){
+                    Box(
+                        modifier = Modifier
+                            .size(100.dp)
+                            .clip(shape = CircleShape)
+                            .background(color = MaterialTheme.colorScheme.primary)
+                    ) {
                         AsyncImage(
                             modifier = Modifier.fillMaxSize(),
                             contentScale = ContentScale.Crop,
-                            model ="https://www.catholicsingles.com/wp-content/uploads/2020/06/blog-header-3.png", contentDescription = "")
+                            model = "https://www.catholicsingles.com/wp-content/uploads/2020/06/blog-header-3.png",
+                            contentDescription = ""
+                        )
                     }
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "Partha R", fontSize = 18.sp, fontWeight = FontWeight.Bold)
 
                     Spacer(modifier = Modifier.height(16.dp))
-                    Row(modifier = Modifier.fillMaxWidth().padding(start = 12.dp, end = 12.dp)) {
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 12.dp, end = 12.dp)) {
                         Text(text = "Your Posts!", fontSize = 18.sp, fontWeight = FontWeight.Bold)
                     }
                 }
