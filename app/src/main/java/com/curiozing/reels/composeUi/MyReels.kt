@@ -13,9 +13,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CircularProgressIndicator
@@ -40,6 +44,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.curiozing.reels.AppKeysAndBaseUrl.IMAGE_BASE_URL
 import com.curiozing.reels.R
+import com.curiozing.reels.model.reels.Reels
 import com.curiozing.reels.viewModel.ReelsViewModel
 import kotlin.random.Random
 
@@ -52,12 +57,12 @@ fun MyReels(navigateTo: () -> Unit) {
 
     val reelsViewModel: ReelsViewModel = viewModel()
     val reelsList = reelsViewModel.reels.collectAsState()
-
     val reelItemHeight = configuration.current.screenHeightDp / 2.5
 
     val reelItemHeightInPx = with(density) {
         reelItemHeight.dp.toPx()
     }
+
 
     Scaffold(
         floatingActionButton = {
@@ -79,93 +84,114 @@ fun MyReels(navigateTo: () -> Unit) {
             }
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
+        if (reelsList.value.isNotEmpty()) {
+            ReelsGrid(reelsList.value,reelItemHeight,reelItemHeightInPx)
+        } else {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
 
-            ) {
-
-            if (reelsList.value.isNotEmpty()) {
-                LazyVerticalGrid(columns = GridCells.Fixed(2),
-                    content = {
-                        items(reelsList.value.size) {
-                            val reel = reelsList.value[it]
-                            val randomInt = Random.nextInt(200, 500)
-
-                            Column {
-                                Box(
-                                    modifier = Modifier.fillMaxSize()
-                                ) {
-                                    AsyncImage(
-                                        model = "$IMAGE_BASE_URL$randomInt/540/960",
-                                        contentDescription = "reel image",
-                                        contentScale = ContentScale.FillWidth,
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(reelItemHeight.dp)
-                                    )
-
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(reelItemHeight.dp)
-                                            .background(
-                                                Brush.verticalGradient(
-                                                    colors = listOf(
-                                                        Color.Transparent,
-                                                        Color.Black.copy(alpha = 0.1f),
-                                                        Color.Black.copy(alpha = 0.5f),
-                                                        Color.Black.copy(alpha = 0.7f),
-                                                        Color.Black.copy(alpha = 9f)
-                                                    ),
-                                                    startY = 0f,
-                                                    endY = reelItemHeightInPx
-                                                )
-                                            ),
-                                        contentAlignment = Alignment.BottomStart
-                                    ) {
-                                        Column {
-                                            Text(
-                                                text = reel.descriptions, maxLines = 2,
-                                                lineHeight = 16.sp,
-                                                modifier = Modifier.padding(start = 12.dp),
-                                                fontSize = 12.sp, color = Color.White
-                                            )
-                                            Spacer(modifier = Modifier.height(4.dp))
-                                            Row(
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .padding(start = 12.dp, end = 12.dp),
-                                                horizontalArrangement = Arrangement.SpaceBetween
-                                            ) {
-                                                UserInteractionItem(
-                                                    iconId = R.drawable.like_icon,
-                                                    content = reel.userInteractions.likeCount.toString()
-                                                )
-                                                UserInteractionItem(
-                                                    iconId = R.drawable.comment_icon,
-                                                    content = reel.userInteractions.commentsCount.toString()
-                                                )
-                                                UserInteractionItem(
-                                                    iconId = R.drawable.share_icon,
-                                                    content = reel.userInteractions.shareCount.toString()
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                    })
-            } else {
+                ) {
                 CircularProgressIndicator()
             }
         }
 
     }
 }
+
+@Composable
+fun ReelsGrid(reelsList:List<Reels>,reelItemHeight:Double,reelItemHeightInPx:Float){
+
+
+    LazyVerticalGrid(columns = GridCells.Fixed(2),
+        content = {
+
+            item(span = { GridItemSpan(maxLineSpan) }) {
+                Column(
+                    modifier = Modifier
+                        .padding(top = 20.dp, bottom = 20.dp)
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "Your Posts!")
+                }
+            }
+
+            items(reelsList.size) {
+                val reel = reelsList[it]
+                val randomInt = Random.nextInt(200, 500)
+
+                Column {
+                    Box(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        AsyncImage(
+                            model = "$IMAGE_BASE_URL$randomInt/540/960",
+                            contentDescription = "reel image",
+                            contentScale = ContentScale.FillWidth,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(reelItemHeight.dp)
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(reelItemHeight.dp)
+                                .background(
+                                    Brush.verticalGradient(
+                                        colors = listOf(
+                                            Color.Transparent,
+                                            Color.Black.copy(alpha = 0.1f),
+                                            Color.Black.copy(alpha = 0.5f),
+                                            Color.Black.copy(alpha = 0.7f),
+                                            Color.Black.copy(alpha = 9f)
+                                        ),
+                                        startY = 0f,
+                                        endY = reelItemHeightInPx
+                                    )
+                                ),
+                            contentAlignment = Alignment.BottomStart
+                        ) {
+                            Column {
+                                Text(
+                                    text = reel.descriptions, maxLines = 2,
+                                    lineHeight = 16.sp,
+                                    modifier = Modifier.padding(start = 12.dp),
+                                    fontSize = 12.sp, color = Color.White
+                                )
+                                Spacer(modifier = Modifier.height(4.dp))
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(start = 12.dp, end = 12.dp),
+                                    horizontalArrangement = Arrangement.SpaceBetween
+                                ) {
+                                    UserInteractionItem(
+                                        iconId = R.drawable.like_icon,
+                                        content = reel.userInteractions.likeCount.toString()
+                                    )
+                                    UserInteractionItem(
+                                        iconId = R.drawable.comment_icon,
+                                        content = reel.userInteractions.commentsCount.toString()
+                                    )
+                                    UserInteractionItem(
+                                        iconId = R.drawable.share_icon,
+                                        content = reel.userInteractions.shareCount.toString()
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        })
+
+
+}
+
 
 @Composable
 fun UserInteractionItem(iconId: Int, content: String) {
