@@ -202,7 +202,6 @@ fun BottomBarNavigation(navController: NavHostController) {
     }
 }
 
-
 sealed class BottomNavigationItem(val name: String, val route: String, val icon: Int) {
     data object Home : BottomNavigationItem("Home", "home", R.drawable.home_icon)
     data object CreateReel :
@@ -210,7 +209,6 @@ sealed class BottomNavigationItem(val name: String, val route: String, val icon:
 
     data object Profile : BottomNavigationItem("Profile", "profile", R.drawable.profile_icon)
 }
-
 
 @Preview(showBackground = true)
 @Composable
