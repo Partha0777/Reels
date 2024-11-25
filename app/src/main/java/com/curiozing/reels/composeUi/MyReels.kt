@@ -128,7 +128,8 @@ fun ReelsGrid(reelsList: List<Reels>, reelItemHeight: Double, reelItemHeightInPx
                     }
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "Partha R", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(text = "Followers - 43K", fontSize = 14.sp)
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(
                         modifier = Modifier
