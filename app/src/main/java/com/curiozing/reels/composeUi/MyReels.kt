@@ -112,7 +112,6 @@ fun ReelsGrid(reelsList: List<Reels>, reelItemHeight: Double, reelItemHeightInPx
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-
                     Box(
                         modifier = Modifier
                             .size(100.dp)
