@@ -131,7 +131,6 @@ fun AppContent(mainNavigateController: NavController) {
         WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
         WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = true
 
-
         Scaffold(
             bottomBar = {
                 BottomBarNavigation(navController)
@@ -165,7 +164,7 @@ fun BottomBarNavigation(navController: NavHostController) {
         BottomNavigationItem.Profile,
     )
     val currentScreen = navController.currentBackStackEntryAsState().value?.destination
-    Box{
+    Box {
         BottomNavigation(
             modifier = Modifier
                 .padding(horizontal = 18.dp, vertical = 18.dp)
@@ -199,7 +198,9 @@ fun BottomBarNavigation(navController: NavHostController) {
 
 sealed class BottomNavigationItem(val name: String, val route: String, val icon: Int) {
     data object Home : BottomNavigationItem("Home", "home", R.drawable.home_icon)
-    data object CreateReel : BottomNavigationItem("Create", "createReels", R.drawable.video_recording_icon)
+    data object CreateReel :
+        BottomNavigationItem("Create", "createReels", R.drawable.video_recording_icon)
+
     data object Profile : BottomNavigationItem("Profile", "profile", R.drawable.profile_icon)
 }
 
