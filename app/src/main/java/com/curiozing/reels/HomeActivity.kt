@@ -104,7 +104,6 @@ fun AppScreenNavigator() {
         composable("splash") {
             AppSplashScreen(navController = navigateController)
         }
-
         composable("main") {
             AppContent(navigateController)
         }
@@ -153,7 +152,6 @@ fun AppContent(mainNavigateController: NavController) {
                 composable(BottomNavigationItem.Profile.route) {
                     Profile()
                 }
-
             }
         }
     }
