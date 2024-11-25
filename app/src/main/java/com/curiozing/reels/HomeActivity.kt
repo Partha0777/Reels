@@ -157,7 +157,6 @@ fun AppContent(mainNavigateController: NavController) {
     }
 }
 
-
 @Composable
 fun BottomBarNavigation(navController: NavHostController) {
     val bottomItems = listOf(
@@ -166,9 +165,7 @@ fun BottomBarNavigation(navController: NavHostController) {
         BottomNavigationItem.Profile,
     )
     val currentScreen = navController.currentBackStackEntryAsState().value?.destination
-    Box(
-        // Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp).background(color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(50.dp)),
-    ) {
+    Box{
         BottomNavigation(
             modifier = Modifier
                 .padding(horizontal = 18.dp, vertical = 18.dp)
