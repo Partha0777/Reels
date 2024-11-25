@@ -104,7 +104,6 @@ fun ReelsGrid(reelsList: List<Reels>, reelItemHeight: Double, reelItemHeightInPx
 
     LazyVerticalGrid(columns = GridCells.Fixed(2),
         content = {
-
             item(span = { GridItemSpan(maxLineSpan) }) {
                 Column(
                     modifier = Modifier
@@ -128,7 +127,7 @@ fun ReelsGrid(reelsList: List<Reels>, reelItemHeight: Double, reelItemHeightInPx
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(text = "Partha R", fontSize = 18.sp, fontWeight = FontWeight.Bold)
                     Spacer(modifier = Modifier.height(4.dp))
-                    Text(text = "Followers - 43K", fontSize = 14.sp)
+                    Text(text = "Posts - 340", fontSize = 14.sp)
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(
                         modifier = Modifier
