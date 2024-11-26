@@ -101,8 +101,8 @@ fun MyReels(navigateTo: () -> Unit) {
 
 @Composable
 fun ReelsGrid(reelsList: List<Reels>, reelItemHeight: Double, reelItemHeightInPx: Float) {
-
     LazyVerticalGrid(columns = GridCells.Fixed(2),
+
         content = {
             item(span = { GridItemSpan(maxLineSpan) }) {
                 Column(
