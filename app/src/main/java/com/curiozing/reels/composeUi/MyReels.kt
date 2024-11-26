@@ -62,7 +62,6 @@ fun MyReels(navigateTo: () -> Unit) {
         reelItemHeight.dp.toPx()
     }
 
-
     Scaffold(
         floatingActionButton = {
             Box(
