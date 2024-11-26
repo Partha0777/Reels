@@ -13,7 +13,6 @@ import retrofit2.http.GET
 
 object ApiService {
     private var retrofitClient: Retrofit? = null
-
     private fun getRetrofitClient(): Retrofit {
         return if (retrofitClient != null) {
             retrofitClient as Retrofit
@@ -31,7 +30,6 @@ object ApiService {
 }
 
 interface ReelsAPI {
-
     @GET("/data/reels.json")
     fun getReels(): Deferred<List<Reels>>
 }
