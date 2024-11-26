@@ -14,10 +14,10 @@ import retrofit2.http.GET
 object ApiService {
     private var retrofitClient: Retrofit? = null
 
-    private fun getRetrofitClient() : Retrofit {
-        return if(retrofitClient != null){
+    private fun getRetrofitClient(): Retrofit {
+        return if (retrofitClient != null) {
             retrofitClient as Retrofit
-        }else{
+        } else {
             retrofitClient = Retrofit.Builder()
                 .client(OkHttpClient()).baseUrl(AppKeysAndBaseUrl.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -30,8 +30,8 @@ object ApiService {
     val reelsAPI: ReelsAPI = getRetrofitClient().create(ReelsAPI::class.java)
 }
 
-interface ReelsAPI{
+interface ReelsAPI {
 
     @GET("/data/reels.json")
-    fun getReels() : Deferred<List<Reels>>
+    fun getReels(): Deferred<List<Reels>>
 }
