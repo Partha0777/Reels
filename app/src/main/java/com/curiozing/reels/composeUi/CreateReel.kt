@@ -7,6 +7,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.MediaStore
+import androidx.activity.compose.ManagedActivityResultLauncher
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -29,7 +33,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,7 +46,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import java.security.Permission
 
 
 private val REQUEST_VIDEO_CAPTURE = 1
@@ -46,12 +53,59 @@ private val REQUEST_PERMISSIONS = 2
 
 @Composable
 fun CreateReel() {
+
+    var permissionsGranted by remember { mutableStateOf(false) }
+    var showRationale by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val permissions = listOf(
+        Manifest.permission.CAMERA,
+    )
+    val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()
+        , onResult = {
+            if(it.resultCode == Activity.RESULT_OK){
+                println("Data... ${it.data?.data}")
+            }
+        })
+
+
+    val requestPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions(),
+        onResult = {permissionsResult ->
+            val allGranted = permissionsResult.values.all { it }
+            permissionsGranted = allGranted
+        }
+    )
+
+
+    val mediaWriteLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocumentTree()
+    ) { uri ->
+        // Handle the selected directory URI
+        if (uri != null) {
+            context.contentResolver.takePersistableUriPermission(
+                uri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+            )
+        }
+    }
+
+    LaunchedEffect(Unit){
+        mediaWriteLauncher.launch(null)
+       permissionsGranted = permissions.all {permissions ->
+           ContextCompat.checkSelfPermission(context,permissions) == PackageManager.PERMISSION_GRANTED
+       }
+    }
+
+
+
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-        val context = LocalContext.current
+
+
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -72,7 +126,14 @@ fun CreateReel() {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.clickable(onClick = {
-                        checkAndRequestPermission(context)
+                        if(permissionsGranted){
+                            val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+                            videoIntent.resolveActivity(context.packageManager)?.let {
+                                launcher.launch(videoIntent)
+                            }
+                        }else{
+                            requestPermissionLauncher.launch(permissions.toTypedArray())
+                        }
                     })
                 ) {
                     Icon(
@@ -109,6 +170,9 @@ fun CreateReel() {
             }
         }
     }
+
+
+
 }
 
 fun checkAndRequestPermission(context:Context) : Boolean {
@@ -127,10 +191,10 @@ fun checkAndRequestPermission(context:Context) : Boolean {
 }
 
 @SuppressLint("QueryPermissionsNeeded")
-fun startRecordingVideo(context: Context){
-    val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-    videoIntent.resolveActivity(context.packageManager)?.let {
+fun startRecordingVideo(
+    context: Context,
+    launcher: ManagedActivityResultLauncher<Intent, ActivityResult>
+){
 
 
-    }
 }
