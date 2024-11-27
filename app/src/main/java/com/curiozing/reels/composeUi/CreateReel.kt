@@ -1,9 +1,12 @@
 package com.curiozing.reels.composeUi
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.provider.MediaStore
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -121,4 +124,13 @@ fun checkAndRequestPermission(context:Context) : Boolean {
     }
 
     return true
+}
+
+@SuppressLint("QueryPermissionsNeeded")
+fun startRecordingVideo(context: Context){
+    val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+    videoIntent.resolveActivity(context.packageManager)?.let {
+
+
+    }
 }
