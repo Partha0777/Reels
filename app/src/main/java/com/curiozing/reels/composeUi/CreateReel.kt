@@ -1,5 +1,9 @@
 package com.curiozing.reels.composeUi
 
+import android.Manifest
+import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -27,7 +31,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import java.security.Permission
+
+
+private val REQUEST_VIDEO_CAPTURE = 1
+private val REQUEST_PERMISSIONS = 2
 
 @Composable
 fun CreateReel() {
@@ -36,6 +48,8 @@ fun CreateReel() {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
+        val context = LocalContext.current
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
@@ -53,7 +67,10 @@ fun CreateReel() {
 
             ) {
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.clickable(onClick = {
+                        checkAndRequestPermission(context)
+                    })
                 ) {
                     Icon(
                         imageVector = Icons.Filled.PlayArrow,
@@ -89,4 +106,19 @@ fun CreateReel() {
             }
         }
     }
+}
+
+fun checkAndRequestPermission(context:Context) : Boolean {
+    val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+    val requiredPermission = permissions.filter {
+        ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    if(requiredPermission.isNotEmpty()){
+        ActivityCompat.requestPermissions(context as Activity,requiredPermission.toTypedArray(), REQUEST_PERMISSIONS)
+     return false
+    }
+
+    return true
 }
