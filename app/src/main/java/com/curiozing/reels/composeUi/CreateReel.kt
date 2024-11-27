@@ -48,14 +48,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 
-private val REQUEST_VIDEO_CAPTURE = 1
-private val REQUEST_PERMISSIONS = 2
 
 @Composable
 fun CreateReel() {
 
     var permissionsGranted by remember { mutableStateOf(false) }
-    var showRationale by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val permissions = listOf(
         Manifest.permission.CAMERA,
@@ -168,31 +165,4 @@ fun CreateReel() {
             }
         }
     }
-
-
-
-}
-
-fun checkAndRequestPermission(context:Context) : Boolean {
-    val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
-    val requiredPermission = permissions.filter {
-        ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
-    }
-
-    if(requiredPermission.isNotEmpty()){
-        ActivityCompat.requestPermissions(context as Activity,requiredPermission.toTypedArray(), REQUEST_PERMISSIONS)
-     return false
-    }
-
-    return true
-}
-
-@SuppressLint("QueryPermissionsNeeded")
-fun startRecordingVideo(
-    context: Context,
-    launcher: ManagedActivityResultLauncher<Intent, ActivityResult>
-){
-
-
 }
