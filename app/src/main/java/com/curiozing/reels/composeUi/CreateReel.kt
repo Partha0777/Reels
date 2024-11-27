@@ -128,9 +128,7 @@ fun CreateReel() {
                     modifier = Modifier.clickable(onClick = {
                         if(permissionsGranted){
                             val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-                            videoIntent.resolveActivity(context.packageManager)?.let {
-                                launcher.launch(videoIntent)
-                            }
+                            launcher.launch(videoIntent)
                         }else{
                             requestPermissionLauncher.launch(permissions.toTypedArray())
                         }
