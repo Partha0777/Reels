@@ -50,10 +50,10 @@ import androidx.core.content.ContextCompat
 
 @Composable
 fun CreateReel() {
+    val context = LocalContext.current
 
     var permissionsGranted by remember { mutableStateOf(false) }
-    val context = LocalContext.current
-    val permissions = listOf(Manifest.permission.CAMERA,)
+    val permissions = Manifest.permission.CAMERA
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()
         , onResult = {
             if(it.resultCode == Activity.RESULT_OK){
@@ -63,18 +63,15 @@ fun CreateReel() {
 
 
     val requestPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestMultiplePermissions(),
-        onResult = {permissionsResult ->
-            val allGranted = permissionsResult.values.all { it }
-            permissionsGranted = allGranted
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = {isGrandad ->
+            permissionsGranted = isGrandad
         }
     )
 
 
     LaunchedEffect(Unit){
-       permissionsGranted = permissions.all {permissions ->
-           ContextCompat.checkSelfPermission(context,permissions) == PackageManager.PERMISSION_GRANTED
-       }
+       permissionsGranted =  ContextCompat.checkSelfPermission(context,permissions) == PackageManager.PERMISSION_GRANTED
     }
 
     Column(
@@ -108,7 +105,7 @@ fun CreateReel() {
                             val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
                             launcher.launch(videoIntent)
                         }else{
-                            requestPermissionLauncher.launch(permissions.toTypedArray())
+                            requestPermissionLauncher.launch(permissions)
                         }
                     })
                 ) {
