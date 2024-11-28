@@ -50,16 +50,28 @@ fun CreateReel() {
 
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
-    val permissionResultLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult(), onResult = {
+
+
+    val permissionResultLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = {
             if(it.resultCode == Activity.RESULT_OK){
                 println("Data... ${it.data?.data}")
             }
         })
 
+    fun recordVideo(){
+        val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+        permissionResultLauncher.launch(videoIntent)
+    }
+
     val permissionRequestLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = {isGrandad ->
             permissionsGranted = isGrandad
+            if(permissionsGranted){
+                recordVideo()
+            }
         }
     )
 
@@ -68,13 +80,13 @@ fun CreateReel() {
        permissionsGranted =  ContextCompat.checkSelfPermission(context,permissions) == PackageManager.PERMISSION_GRANTED
     }
 
+
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-
-
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -96,8 +108,7 @@ fun CreateReel() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.clickable(onClick = {
                         if(permissionsGranted){
-                            val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-                            permissionResultLauncher.launch(videoIntent)
+                           recordVideo()
                         }else{
                             permissionRequestLauncher.launch(permissions)
                         }
