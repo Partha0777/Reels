@@ -44,7 +44,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 
@@ -54,9 +53,7 @@ fun CreateReel() {
 
     var permissionsGranted by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    val permissions = listOf(
-        Manifest.permission.CAMERA,
-    )
+    val permissions = listOf(Manifest.permission.CAMERA,)
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()
         , onResult = {
             if(it.resultCode == Activity.RESULT_OK){
@@ -74,27 +71,11 @@ fun CreateReel() {
     )
 
 
-    val mediaWriteLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.OpenDocumentTree()
-    ) { uri ->
-        // Handle the selected directory URI
-        if (uri != null) {
-            context.contentResolver.takePersistableUriPermission(
-                uri,
-                Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-            )
-        }
-    }
-
     LaunchedEffect(Unit){
-        mediaWriteLauncher.launch(null)
        permissionsGranted = permissions.all {permissions ->
            ContextCompat.checkSelfPermission(context,permissions) == PackageManager.PERMISSION_GRANTED
        }
     }
-
-
-
 
     Column(
         verticalArrangement = Arrangement.Center,
