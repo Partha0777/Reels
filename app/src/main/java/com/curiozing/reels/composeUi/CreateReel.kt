@@ -97,7 +97,13 @@ fun CreateReel() {
                 modifier = Modifier
                     .clip(shape = RoundedCornerShape(20))
                     .background(MaterialTheme.colorScheme.primary)
-                    .clickable(onClick = {},
+                    .clickable(onClick = {
+                        if(permissionsGranted){
+                            recordVideo()
+                        }else{
+                            permissionRequestLauncher.launch(permissions)
+                        }
+                    },
                         indication = ripple(bounded = true, color = Color.Gray),
                         interactionSource = remember { MutableInteractionSource() }
                     )
@@ -106,13 +112,6 @@ fun CreateReel() {
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.clickable(onClick = {
-                        if(permissionsGranted){
-                           recordVideo()
-                        }else{
-                            permissionRequestLauncher.launch(permissions)
-                        }
-                    })
                 ) {
                     Icon(
                         imageVector = Icons.Filled.PlayArrow,
