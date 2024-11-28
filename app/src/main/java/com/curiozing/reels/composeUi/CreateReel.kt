@@ -75,12 +75,9 @@ fun CreateReel() {
         }
     )
 
-
     LaunchedEffect(Unit){
        permissionsGranted =  ContextCompat.checkSelfPermission(context,permissions) == PackageManager.PERMISSION_GRANTED
     }
-
-
 
     Column(
         verticalArrangement = Arrangement.Center,
