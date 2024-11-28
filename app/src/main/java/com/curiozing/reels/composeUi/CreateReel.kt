@@ -1,15 +1,11 @@
 package com.curiozing.reels.composeUi
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.MediaStore
-import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -54,15 +50,13 @@ fun CreateReel() {
 
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
-    val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()
-        , onResult = {
+    val permissionResultLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult(), onResult = {
             if(it.resultCode == Activity.RESULT_OK){
                 println("Data... ${it.data?.data}")
             }
         })
 
-
-    val requestPermissionLauncher = rememberLauncherForActivityResult(
+    val permissionRequestLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = {isGrandad ->
             permissionsGranted = isGrandad
@@ -103,9 +97,9 @@ fun CreateReel() {
                     modifier = Modifier.clickable(onClick = {
                         if(permissionsGranted){
                             val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-                            launcher.launch(videoIntent)
+                            permissionResultLauncher.launch(videoIntent)
                         }else{
-                            requestPermissionLauncher.launch(permissions)
+                            permissionRequestLauncher.launch(permissions)
                         }
                     })
                 ) {
