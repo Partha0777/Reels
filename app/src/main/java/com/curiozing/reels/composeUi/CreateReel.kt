@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 
 
-
 @Composable
 fun CreateReel() {
     val context = LocalContext.current
@@ -55,28 +54,31 @@ fun CreateReel() {
     val permissionResultLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
         onResult = {
-            if(it.resultCode == Activity.RESULT_OK){
+            if (it.resultCode == Activity.RESULT_OK) {
                 println("Data... ${it.data?.data}")
             }
         })
 
-    fun recordVideo(){
+    fun recordVideo() {
         val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
         permissionResultLauncher.launch(videoIntent)
     }
 
     val permissionRequestLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
-        onResult = {isGrandad ->
+        onResult = { isGrandad ->
             permissionsGranted = isGrandad
-            if(permissionsGranted){
+            if (permissionsGranted) {
                 recordVideo()
             }
         }
     )
 
-    LaunchedEffect(Unit){
-       permissionsGranted =  ContextCompat.checkSelfPermission(context,permissions) == PackageManager.PERMISSION_GRANTED
+    LaunchedEffect(Unit) {
+        permissionsGranted = ContextCompat.checkSelfPermission(
+            context,
+            permissions
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     Column(
@@ -94,9 +96,9 @@ fun CreateReel() {
                     .clip(shape = RoundedCornerShape(20))
                     .background(MaterialTheme.colorScheme.primary)
                     .clickable(onClick = {
-                        if(permissionsGranted){
+                        if (permissionsGranted) {
                             recordVideo()
-                        }else{
+                        } else {
                             permissionRequestLauncher.launch(permissions)
                         }
                     },
