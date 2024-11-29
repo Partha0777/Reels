@@ -89,7 +89,6 @@ fun CreateReel() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-
             Box(
                 modifier = Modifier
                     .clip(shape = RoundedCornerShape(20))
