@@ -53,7 +53,9 @@ fun CreateReel() {
     val permissionResultLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
         onResult = {
-            if (it.resultCode == Activity.RESULT_OK) { }
+            if (it.resultCode == Activity.RESULT_OK) {
+                val datPath = it.data?.data
+            }
         })
 
     fun recordVideo() {
