@@ -15,11 +15,10 @@ object ApiService {
         return if (retrofitClient != null) {
             retrofitClient as Retrofit
         } else {
-            retrofitClient = Retrofit.Builder()
-                .client(OkHttpClient()).baseUrl(AppKeysAndBaseUrl.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
-                .build()
+            retrofitClient =
+                Retrofit.Builder().client(OkHttpClient()).baseUrl(AppKeysAndBaseUrl.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(CoroutineCallAdapterFactory()).build()
             retrofitClient as Retrofit
         }
     }
