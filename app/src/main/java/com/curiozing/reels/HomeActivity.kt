@@ -47,11 +47,14 @@ import com.curiozing.reels.composeUi.Home
 import com.curiozing.reels.composeUi.Profile
 import com.curiozing.reels.ui.theme.ContentColor
 import com.curiozing.reels.ui.theme.ReelsTheme
+import com.google.firebase.FirebaseApp
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this);
+
         setContent {
             ReelsTheme {
                 AppScreenNavigator()
