@@ -69,8 +69,7 @@ dependencies {
     implementation("com.google.firebase:firebase-bom:33.6.0") // Firebase Bill of Materials (BOM)
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-common-ktx:21.0.0")
-    implementation("com.google.firebase:firebase-firestore-ktx:25.1.1")
-
+    implementation("com.google.firebase:firebase-storage")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
