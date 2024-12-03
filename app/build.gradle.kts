@@ -70,6 +70,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-common-ktx:21.0.0")
     implementation("com.google.firebase:firebase-storage")
+    implementation("com.google.firebase:firebase-storage-ktx:21.0.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
