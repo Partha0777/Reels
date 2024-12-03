@@ -1,8 +1,9 @@
 package com.curiozing.reels.utils
 
-import java.net.URI
+import com.google.firebase.firestore.FirebaseFirestore
 
 class VideoUploadManger {
+    var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     fun uploadVideo(){
 
