@@ -1,6 +1,6 @@
 package com.curiozing.reels.utils
 
-class CloudinaryUploader : VideoUploadManger{
+class CloudinaryUploader : VideoUploadManger {
     override fun uploadVideo() {
 
     }
@@ -10,8 +10,6 @@ class CloudinaryUploader : VideoUploadManger{
     }
 
 }
-
-
 
 
 interface VideoUploadManger {
