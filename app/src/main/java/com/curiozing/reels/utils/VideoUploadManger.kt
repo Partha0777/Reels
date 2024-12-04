@@ -15,4 +15,5 @@ class CloudinaryUploader : VideoUploadManger {
 interface VideoUploadManger {
     fun uploadVideo()
     fun updateVideoUrlToDatabase()
+
 }
