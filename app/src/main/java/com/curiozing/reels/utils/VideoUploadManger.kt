@@ -16,15 +16,12 @@ class CloudinaryUploader : VideoUploadManger {
             }
 
             override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
-                TODO("Not yet implemented")
             }
 
             override fun onError(requestId: String?, error: ErrorInfo?) {
-                TODO("Not yet implemented")
             }
 
             override fun onReschedule(requestId: String?, error: ErrorInfo?) {
-                TODO("Not yet implemented")
             }
 
 
