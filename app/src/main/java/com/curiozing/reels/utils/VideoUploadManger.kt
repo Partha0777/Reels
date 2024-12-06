@@ -16,7 +16,6 @@ class CloudinaryUploader : VideoUploadManger {
             override fun onError(requestId: String?, error: ErrorInfo?) {}
 
             override fun onReschedule(requestId: String?, error: ErrorInfo?) {}
-
         })
     }
 
