@@ -131,14 +131,11 @@ fun AppContent(mainNavigateController: NavController) {
         WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
         WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = true
 
-        Scaffold(
-            bottomBar = {
-                BottomBarNavigation(navController)
-            }
-        ) {
+        Scaffold(bottomBar = {
+            BottomBarNavigation(navController)
+        }) {
             NavHost(
-                navController = navController,
-                startDestination = BottomNavigationItem.Home.route
+                navController = navController, startDestination = BottomNavigationItem.Home.route
             ) {
                 composable(BottomNavigationItem.Home.route) {
                     Home()
@@ -168,29 +165,25 @@ fun BottomBarNavigation(navController: NavHostController) {
         BottomNavigation(
             modifier = Modifier
                 .padding(horizontal = 18.dp, vertical = 18.dp)
-                .clip(RoundedCornerShape(80)),
-            backgroundColor = MaterialTheme.colorScheme.primary
+                .clip(RoundedCornerShape(80)), backgroundColor = MaterialTheme.colorScheme.primary
         ) {
             bottomItems.forEach {
-                BottomNavigationItem(
-                    selected = it.route == currentScreen?.route,
-                    onClick = {
-                        navController.navigate(it.route) {
-                            popUpTo(navController.graph.startDestinationId) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
+                BottomNavigationItem(selected = it.route == currentScreen?.route, onClick = {
+                    navController.navigate(it.route) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            saveState = true
                         }
-                    },
-                    icon = {
-                        Icon(
-                            painter = painterResource(id = it.icon),
-                            contentDescription = "",
-                            modifier = Modifier.size(30.dp),
-                            tint = ContentColor
-                        )
-                    })
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }, icon = {
+                    Icon(
+                        painter = painterResource(id = it.icon),
+                        contentDescription = "",
+                        modifier = Modifier.size(30.dp),
+                        tint = ContentColor
+                    )
+                })
             }
         }
     }
