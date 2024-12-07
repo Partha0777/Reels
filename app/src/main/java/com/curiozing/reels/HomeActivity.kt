@@ -191,9 +191,7 @@ fun BottomBarNavigation(navController: NavHostController) {
 
 sealed class BottomNavigationItem(val name: String, val route: String, val icon: Int) {
     data object Home : BottomNavigationItem("Home", "home", R.drawable.home_icon)
-    data object CreateReel :
-        BottomNavigationItem("Create", "createReels", R.drawable.video_recording_icon)
-
+    data object CreateReel : BottomNavigationItem("Create", "createReels", R.drawable.video_recording_icon)
     data object Profile : BottomNavigationItem("Profile", "profile", R.drawable.profile_icon)
 }
 
