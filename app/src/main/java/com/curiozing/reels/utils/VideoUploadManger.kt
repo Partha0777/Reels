@@ -21,6 +21,17 @@ class CloudinaryUploader : VideoUploadManger {
     }
 
     override fun updateVideoUrlToDatabase() {}
+    override fun onUploading() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onUploadingSuccess() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onUploadingFailure() {
+        TODO("Not yet implemented")
+    }
 
 }
 
@@ -28,5 +39,8 @@ class CloudinaryUploader : VideoUploadManger {
 interface VideoUploadManger {
     fun uploadVideo(path:String)
     fun updateVideoUrlToDatabase()
+    fun onUploading()
+    fun onUploadingSuccess()
+    fun onUploadingFailure()
 
 }
