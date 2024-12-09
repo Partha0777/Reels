@@ -10,28 +10,21 @@ class CloudinaryUploader : VideoUploadManger {
         MediaManager.get().upload(path).callback(object : UploadCallback {
             override fun onStart(requestId: String?) {}
 
-            override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {}
+            override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
+            }
 
-            override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {}
+            override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
+            }
 
-            override fun onError(requestId: String?, error: ErrorInfo?) {}
+            override fun onError(requestId: String?, error: ErrorInfo?) {
+            }
 
             override fun onReschedule(requestId: String?, error: ErrorInfo?) {}
         })
     }
 
     override fun updateVideoUrlToDatabase() {}
-    override fun onUploading() {
-        TODO("Not yet implemented")
-    }
 
-    override fun onUploadingSuccess() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onUploadingFailure() {
-        TODO("Not yet implemented")
-    }
 
 }
 
@@ -39,8 +32,5 @@ class CloudinaryUploader : VideoUploadManger {
 interface VideoUploadManger {
     fun uploadVideo(path:String)
     fun updateVideoUrlToDatabase()
-    fun onUploading()
-    fun onUploadingSuccess()
-    fun onUploadingFailure()
 
 }
