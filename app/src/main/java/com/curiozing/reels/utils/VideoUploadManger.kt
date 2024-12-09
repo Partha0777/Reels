@@ -5,9 +5,9 @@ import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
 
 class CloudinaryUploader : VideoUploadManger {
-    override fun uploadVideo() {
+    override fun uploadVideo(path:String) {
 
-        MediaManager.get().upload("").callback(object : UploadCallback {
+        MediaManager.get().upload(path).callback(object : UploadCallback {
             override fun onStart(requestId: String?) {}
 
             override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {}
@@ -26,7 +26,7 @@ class CloudinaryUploader : VideoUploadManger {
 
 
 interface VideoUploadManger {
-    fun uploadVideo()
+    fun uploadVideo(path:String)
     fun updateVideoUrlToDatabase()
 
 }
