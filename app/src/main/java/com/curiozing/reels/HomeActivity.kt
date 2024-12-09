@@ -67,8 +67,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-fun initCloudinaryConfig(context: Context){
-
+fun initCloudinaryConfig(context: Context) {
     val config: MutableMap<String, String> = HashMap()
     config["cloud_name"] = CLOUDINARY_CLOUD_NAME
     config["api_key"] = CLOUDINARY_API_KEY
