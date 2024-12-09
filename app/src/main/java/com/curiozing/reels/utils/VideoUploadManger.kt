@@ -6,6 +6,7 @@ import com.cloudinary.android.callback.UploadCallback
 
 class CloudinaryUploader : VideoUploadManger {
     override fun uploadVideo() {
+
         MediaManager.get().upload("").callback(object : UploadCallback {
             override fun onStart(requestId: String?) {}
 

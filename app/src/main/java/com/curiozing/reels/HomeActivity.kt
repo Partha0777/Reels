@@ -1,6 +1,7 @@
 package com.curiozing.reels
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
@@ -41,23 +42,38 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.cloudinary.android.MediaManager
+import com.curiozing.reels.AppKeysAndBaseUrl.CLOUDINARY_API_KEY
+import com.curiozing.reels.AppKeysAndBaseUrl.CLOUDINARY_API_SECRET
+import com.curiozing.reels.AppKeysAndBaseUrl.CLOUDINARY_CLOUD_NAME
 import com.curiozing.reels.composeUi.CreateReel
-import com.curiozing.reels.composeUi.MyReels
 import com.curiozing.reels.composeUi.Home
+import com.curiozing.reels.composeUi.MyReels
 import com.curiozing.reels.composeUi.Profile
 import com.curiozing.reels.ui.theme.ContentColor
 import com.curiozing.reels.ui.theme.ReelsTheme
 import kotlinx.coroutines.delay
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initCloudinaryConfig(this)
         setContent {
             ReelsTheme {
                 AppScreenNavigator()
             }
         }
     }
+}
+
+fun initCloudinaryConfig(context: Context){
+
+    val config: MutableMap<String, String> = HashMap()
+    config["cloud_name"] = CLOUDINARY_CLOUD_NAME
+    config["api_key"] = CLOUDINARY_API_KEY
+    config["api_secret"] = CLOUDINARY_API_SECRET
+    MediaManager.init(context, config)
 }
 
 @SuppressLint("CoroutineCreationDuringComposition")
