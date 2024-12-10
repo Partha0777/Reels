@@ -2,8 +2,10 @@ package com.curiozing.reels.composeUi
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -60,13 +62,15 @@ fun CreateReel() {
             if (it.resultCode == Activity.RESULT_OK) {
                 val datPath = it.data?.data
                 datPath?.path?.let { it1 ->
-                    videoUploadManger.uploadVideo(it1,{
+                    getFilePathFromUri(context,it.data?.data!!)?.let { it2 ->
+                        videoUploadManger.uploadVideo(it2,{
 
-                    },{
+                        },{
 
-                    },{
+                        },{
 
-                    })
+                        })
+                    }
                 }
             }
         })
@@ -157,4 +161,17 @@ fun CreateReel() {
             }
         }
     }
+}
+
+private fun getFilePathFromUri(context: Context, uri: Uri): String? {
+    val projection = arrayOf(MediaStore.MediaColumns.DATA)
+    val cursor = context.contentResolver.query(uri, projection, null, null, null)
+    if (cursor != null) {
+        val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+        cursor.moveToFirst()
+        val filePath = cursor.getString(columnIndex)
+        cursor.close()
+        return filePath
+    }
+    return null
 }

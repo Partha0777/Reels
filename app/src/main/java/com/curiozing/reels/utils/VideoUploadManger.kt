@@ -1,14 +1,20 @@
 package com.curiozing.reels.utils
 
+import android.content.Context
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
 
+
 class CloudinaryUploader : VideoUploadManger {
     override fun uploadVideo(path:String,onVideoUploading : () ->Unit, onVideoUploadSuccess : () ->Unit,onVideoUploadFailure : () ->Unit) {
 
-        MediaManager.get().upload(path).callback(object : UploadCallback {
+        MediaManager.get().upload(path)
+            .option("resource_type","video")
+            .callback(object : UploadCallback {
             override fun onStart(requestId: String?) {
                 Log.d("Started Uploading", "")
             }
@@ -26,7 +32,7 @@ class CloudinaryUploader : VideoUploadManger {
             }
 
             override fun onError(requestId: String?, error: ErrorInfo?) {
-                Log.d("onProgress Error", "$error")
+                Log.d("uload Error", "$error")
 
                 onVideoUploadFailure()
             }
