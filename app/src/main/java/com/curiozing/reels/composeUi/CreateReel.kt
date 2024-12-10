@@ -51,7 +51,7 @@ import com.curiozing.reels.utils.VideoUploadManger
 fun CreateReel() {
     val context = LocalContext.current
 
-    val videoUploadManger : VideoUploadManger = CloudinaryUploader()
+    val videoUploadManger: VideoUploadManger = CloudinaryUploader()
 
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
@@ -62,12 +62,12 @@ fun CreateReel() {
             if (it.resultCode == Activity.RESULT_OK) {
                 val datPath = it.data?.data
                 datPath?.path?.let { it1 ->
-                    getFilePathFromUri(context,it.data?.data!!)?.let { it2 ->
-                        videoUploadManger.uploadVideo(it2,{
+                    getFilePathFromUri(context, it.data?.data!!)?.let { it2 ->
+                        videoUploadManger.uploadVideo(it2, {
 
-                        },{
+                        }, {
 
-                        },{
+                        }, {
 
                         })
                     }
