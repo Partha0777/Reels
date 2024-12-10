@@ -41,11 +41,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import com.curiozing.reels.utils.CloudinaryUploader
+import com.curiozing.reels.utils.VideoUploadManger
 
 
 @Composable
 fun CreateReel() {
     val context = LocalContext.current
+
+    val videoUploadManger : VideoUploadManger = CloudinaryUploader()
 
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
@@ -55,7 +59,15 @@ fun CreateReel() {
         onResult = {
             if (it.resultCode == Activity.RESULT_OK) {
                 val datPath = it.data?.data
+                datPath?.path?.let { it1 ->
+                    videoUploadManger.uploadVideo(it1,{
 
+                    },{
+
+                    },{
+
+                    })
+                }
             }
         })
 
