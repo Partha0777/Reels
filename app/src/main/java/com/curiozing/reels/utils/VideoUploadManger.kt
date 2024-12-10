@@ -1,8 +1,5 @@
 package com.curiozing.reels.utils
 
-import android.content.Context
-import android.net.Uri
-import android.provider.MediaStore
 import android.util.Log
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
