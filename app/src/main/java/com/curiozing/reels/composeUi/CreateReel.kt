@@ -43,8 +43,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 import com.curiozing.reels.utils.CloudinaryUploader
 import com.curiozing.reels.utils.VideoUploadManger
+import com.curiozing.reels.viewModel.CreateReelViewModel
 
 
 @Composable
@@ -55,6 +58,7 @@ fun CreateReel() {
 
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
+    val createReelViewModel: CreateReelViewModel = viewModel()
 
     val permissionResultLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
