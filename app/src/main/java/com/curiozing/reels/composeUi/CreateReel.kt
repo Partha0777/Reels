@@ -65,15 +65,9 @@ fun CreateReel() {
         onResult = {
             if (it.resultCode == Activity.RESULT_OK) {
                 val datPath = it.data?.data
-                datPath?.path?.let { it1 ->
-                    getFilePathFromUri(context, it.data?.data!!)?.let { it2 ->
-                        videoUploadManger.uploadVideo(it2, {
-
-                        }, {
-
-                        }, {
-
-                        })
+                datPath?.path?.let { _ ->
+                    getFilePathFromUri(context, it.data?.data!!)?.let { path ->
+                        createReelViewModel.startRecording(path)
                     }
                 }
             }

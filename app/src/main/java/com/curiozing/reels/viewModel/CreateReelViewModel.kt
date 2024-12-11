@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 
 class CreateReelViewModel : ViewModel() {
 
-    fun startRecording(){
+    fun startRecording(path:String){
 
     }
 }
