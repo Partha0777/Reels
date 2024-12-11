@@ -8,7 +8,7 @@ class CreateReelViewModel : ViewModel() {
 
     private val videoUploadManger: VideoUploadManger = CloudinaryUploader()
 
-    fun startRecording(path:String){
+    fun startRecording(path: String) {
         videoUploadManger.uploadVideo(path, {
 
         }, {
