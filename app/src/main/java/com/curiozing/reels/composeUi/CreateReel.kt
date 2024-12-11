@@ -44,17 +44,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
-
-import com.curiozing.reels.utils.CloudinaryUploader
-import com.curiozing.reels.utils.VideoUploadManger
 import com.curiozing.reels.viewModel.CreateReelViewModel
 
 
 @Composable
 fun CreateReel() {
     val context = LocalContext.current
-
-    val videoUploadManger: VideoUploadManger = CloudinaryUploader()
 
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
