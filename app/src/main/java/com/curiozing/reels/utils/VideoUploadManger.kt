@@ -7,35 +7,40 @@ import com.cloudinary.android.callback.UploadCallback
 
 
 class CloudinaryUploader : VideoUploadManger {
-    override fun uploadVideo(path:String,onVideoUploading : () ->Unit, onVideoUploadSuccess : () ->Unit,onVideoUploadFailure : () ->Unit) {
+    override fun uploadVideo(
+        path: String,
+        onVideoUploading: () -> Unit,
+        onVideoUploadSuccess: () -> Unit,
+        onVideoUploadFailure: () -> Unit
+    ) {
 
         MediaManager.get().upload(path)
-            .option("resource_type","video")
+            .option("resource_type", "video")
             .callback(object : UploadCallback {
-            override fun onStart(requestId: String?) {
-                Log.d("Started Uploading", "")
-            }
+                override fun onStart(requestId: String?) {
+                    Log.d("Started Uploading", "")
+                }
 
-            override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
-                Log.d("onProgress Uploading", "$bytes")
+                override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
+                    Log.d("onProgress Uploading", "$bytes")
 
-                onVideoUploading()
-            }
+                    onVideoUploading()
+                }
 
-            override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
-                Log.d("onProgress Success", "")
+                override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
+                    Log.d("onProgress Success", "")
 
-                onVideoUploadSuccess()
-            }
+                    onVideoUploadSuccess()
+                }
 
-            override fun onError(requestId: String?, error: ErrorInfo?) {
-                Log.d("uload Error", "$error")
+                override fun onError(requestId: String?, error: ErrorInfo?) {
+                    Log.d("uload Error", "$error")
 
-                onVideoUploadFailure()
-            }
+                    onVideoUploadFailure()
+                }
 
-            override fun onReschedule(requestId: String?, error: ErrorInfo?) {}
-        }).dispatch()
+                override fun onReschedule(requestId: String?, error: ErrorInfo?) {}
+            }).dispatch()
     }
 
     override fun updateVideoUrlToDatabase() {}
@@ -45,7 +50,13 @@ class CloudinaryUploader : VideoUploadManger {
 
 
 interface VideoUploadManger {
-    fun uploadVideo(path:String, onVideoUploading : () ->Unit, onVideoUploadSuccess : () ->Unit,onVideoUploadFailure : () ->Unit)
+    fun uploadVideo(
+        path: String,
+        onVideoUploading: () -> Unit,
+        onVideoUploadSuccess: () -> Unit,
+        onVideoUploadFailure: () -> Unit
+    )
+
     fun updateVideoUrlToDatabase()
 
 }
