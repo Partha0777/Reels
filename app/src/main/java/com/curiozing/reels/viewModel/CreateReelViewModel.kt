@@ -10,11 +10,8 @@ class CreateReelViewModel : ViewModel() {
 
     fun startRecording(path: String) {
         videoUploadManger.uploadVideo(path, {
-
         }, {
-
         }, {
-
         })
     }
 }
