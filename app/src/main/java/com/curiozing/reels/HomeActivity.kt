@@ -215,7 +215,5 @@ sealed class BottomNavigationItem(val name: String, val route: String, val icon:
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    ReelsTheme {
-        //AppContent()
-    }
+
 }
