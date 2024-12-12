@@ -13,7 +13,6 @@ class CloudinaryUploader : VideoUploadManger {
         onVideoUploadSuccess: () -> Unit,
         onVideoUploadFailure: () -> Unit
     ) {
-
         MediaManager.get().upload(path)
             .option("resource_type", "video")
             .callback(object : UploadCallback {
@@ -42,10 +41,7 @@ class CloudinaryUploader : VideoUploadManger {
                 override fun onReschedule(requestId: String?, error: ErrorInfo?) {}
             }).dispatch()
     }
-
     override fun updateVideoUrlToDatabase() {}
-
-
 }
 
 
