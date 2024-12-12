@@ -22,6 +22,7 @@ object ApiService {
             retrofitClient as Retrofit
         }
     }
+
     val reelsAPI: ReelsAPI = getRetrofitClient().create(ReelsAPI::class.java)
 }
 
