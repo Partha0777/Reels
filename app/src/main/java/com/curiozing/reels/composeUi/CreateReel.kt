@@ -56,38 +56,36 @@ fun CreateReel() {
     val permissions = Manifest.permission.CAMERA
     val createReelViewModel: CreateReelViewModel = viewModel()
 
-    val permissionResultLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult(),
-        onResult = {
-            if (it.resultCode == Activity.RESULT_OK) {
-                val datPath = it.data?.data
-                datPath?.path?.let { _ ->
-                    getFilePathFromUri(context, it.data?.data!!)?.let { path ->
-                        createReelViewModel.startRecording(path)
+    val permissionResultLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult(),
+            onResult = {
+                if (it.resultCode == Activity.RESULT_OK) {
+                    val datPath = it.data?.data
+                    datPath?.path?.let { _ ->
+                        getFilePathFromUri(context, it.data?.data!!)?.let { path ->
+                            createReelViewModel.startRecording(path)
+                        }
                     }
                 }
-            }
-        })
+            })
 
     fun recordVideo() {
         val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
         permissionResultLauncher.launch(videoIntent)
     }
 
-    val permissionRequestLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { isGrandad ->
-            permissionsGranted = isGrandad
-            if (permissionsGranted) {
-                recordVideo()
-            }
-        }
-    )
+    val permissionRequestLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(),
+            onResult = { isGrandad ->
+                permissionsGranted = isGrandad
+                if (permissionsGranted) {
+                    recordVideo()
+                }
+            })
 
     LaunchedEffect(Unit) {
         permissionsGranted = ContextCompat.checkSelfPermission(
-            context,
-            permissions
+            context, permissions
         ) == PackageManager.PERMISSION_GRANTED
     }
 
@@ -98,24 +96,21 @@ fun CreateReel() {
     ) {
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Box(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(20))
-                    .background(MaterialTheme.colorScheme.primary)
-                    .clickable(onClick = {
-                        if (permissionsGranted) {
-                            recordVideo()
-                        } else {
-                            permissionRequestLauncher.launch(permissions)
-                        }
-                    },
-                        indication = ripple(bounded = true, color = Color.Gray),
-                        interactionSource = remember { MutableInteractionSource() }
-                    )
-                    .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+            Box(modifier = Modifier
+                .clip(shape = RoundedCornerShape(20))
+                .background(MaterialTheme.colorScheme.primary)
+                .clickable(onClick = {
+                    if (permissionsGranted) {
+                        recordVideo()
+                    } else {
+                        permissionRequestLauncher.launch(permissions)
+                    }
+                },
+                    indication = ripple(bounded = true, color = Color.Gray),
+                    interactionSource = remember { MutableInteractionSource() })
+                .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
 
             ) {
                 Column(
@@ -132,15 +127,13 @@ fun CreateReel() {
                     Text(text = createReelViewModel.progress.collectAsState().value.toString())
                 }
             }
-            Box(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(20))
-                    .background(MaterialTheme.colorScheme.primary)
-                    .clickable(onClick = {},
-                        indication = ripple(bounded = true, color = Color.Gray),
-                        interactionSource = remember { MutableInteractionSource() }
-                    )
-                    .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+            Box(modifier = Modifier
+                .clip(shape = RoundedCornerShape(20))
+                .background(MaterialTheme.colorScheme.primary)
+                .clickable(onClick = {},
+                    indication = ripple(bounded = true, color = Color.Gray),
+                    interactionSource = remember { MutableInteractionSource() })
+                .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
 
             ) {
                 Column(
