@@ -11,10 +11,10 @@ class CreateReelViewModel : ViewModel() {
 
     private val videoUploadManger: VideoUploadManger = CloudinaryUploader()
 
-    val progress:MutableStateFlow<Int> = MutableStateFlow(0)
+    val progress: MutableStateFlow<Int> = MutableStateFlow(0)
 
     fun startRecording(path: String) {
-        videoUploadManger.uploadVideo(path, {progressValue ->
+        videoUploadManger.uploadVideo(path, { progressValue ->
             progress.value = progressValue
         }, {
         }, {
