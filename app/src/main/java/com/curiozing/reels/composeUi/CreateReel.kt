@@ -32,6 +32,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -127,6 +128,8 @@ fun CreateReel() {
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(text = "Create Reel")
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(text = createReelViewModel.progress.collectAsState().value.toString())
                 }
             }
             Box(
