@@ -21,7 +21,9 @@ class CloudinaryUploader : VideoUploadManger {
                 }
 
                 override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
-                    Log.d("onProgress Uploading", "$bytes")
+                    val percentage = (bytes.toDouble() / totalBytes.toDouble()) * 100
+
+                    Log.d("onProgress Uploading", "$percentage")
 
                     onVideoUploading()
                 }
