@@ -9,7 +9,7 @@ import com.cloudinary.android.callback.UploadCallback
 class CloudinaryUploader : VideoUploadManger {
     override fun uploadVideo(
         path: String,
-        onVideoUploading: () -> Unit,
+        onVideoUploading: (Int) -> Unit,
         onVideoUploadSuccess: () -> Unit,
         onVideoUploadFailure: () -> Unit
     ) {
@@ -23,9 +23,9 @@ class CloudinaryUploader : VideoUploadManger {
                 override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
                     val percentage = (bytes.toDouble() / totalBytes.toDouble()) * 100
 
-                    Log.d("onProgress Uploading", "$percentage")
+                    Log.d("onProgress Uploading", "${percentage.toInt()}")
 
-                    onVideoUploading()
+                    onVideoUploading(percentage.toInt())
                 }
 
                 override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
@@ -50,7 +50,7 @@ class CloudinaryUploader : VideoUploadManger {
 interface VideoUploadManger {
     fun uploadVideo(
         path: String,
-        onVideoUploading: () -> Unit,
+        onVideoUploading: (Int) -> Unit,
         onVideoUploadSuccess: () -> Unit,
         onVideoUploadFailure: () -> Unit
     )
