@@ -51,7 +51,6 @@ import com.curiozing.reels.viewModel.CreateReelViewModel
 @Composable
 fun CreateReel() {
     val context = LocalContext.current
-
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
     val createReelViewModel: CreateReelViewModel = viewModel()
