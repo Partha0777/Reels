@@ -1,11 +1,9 @@
 package com.curiozing.reels.viewModel
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.curiozing.reels.utils.CloudinaryUploader
 import com.curiozing.reels.utils.VideoUploadManger
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 class CreateReelViewModel : ViewModel() {
 
