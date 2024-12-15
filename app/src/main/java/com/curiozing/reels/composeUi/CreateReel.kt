@@ -98,19 +98,20 @@ fun CreateReel() {
         Row(
             modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Box(modifier = Modifier
-                .clip(shape = RoundedCornerShape(20))
-                .background(MaterialTheme.colorScheme.primary)
-                .clickable(onClick = {
-                    if (permissionsGranted) {
-                        recordVideo()
-                    } else {
-                        permissionRequestLauncher.launch(permissions)
-                    }
-                },
-                    indication = ripple(bounded = true, color = Color.Gray),
-                    interactionSource = remember { MutableInteractionSource() })
-                .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+            Box(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(20))
+                    .background(MaterialTheme.colorScheme.primary)
+                    .clickable(onClick = {
+                        if (permissionsGranted) {
+                            recordVideo()
+                        } else {
+                            permissionRequestLauncher.launch(permissions)
+                        }
+                    },
+                        indication = ripple(bounded = true, color = Color.Gray),
+                        interactionSource = remember { MutableInteractionSource() })
+                    .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
 
             ) {
                 Column(
@@ -127,13 +128,14 @@ fun CreateReel() {
                     Text(text = createReelViewModel.progress.collectAsState().value.toString())
                 }
             }
-            Box(modifier = Modifier
-                .clip(shape = RoundedCornerShape(20))
-                .background(MaterialTheme.colorScheme.primary)
-                .clickable(onClick = {},
-                    indication = ripple(bounded = true, color = Color.Gray),
-                    interactionSource = remember { MutableInteractionSource() })
-                .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+            Box(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(20))
+                    .background(MaterialTheme.colorScheme.primary)
+                    .clickable(onClick = {},
+                        indication = ripple(bounded = true, color = Color.Gray),
+                        interactionSource = remember { MutableInteractionSource() })
+                    .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
 
             ) {
                 Column(
