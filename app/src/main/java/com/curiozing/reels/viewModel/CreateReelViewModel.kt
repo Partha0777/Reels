@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class CreateReelViewModel : ViewModel() {
 
     private val videoUploadManger: VideoUploadManger = CloudinaryUploader()
-
     val progress: MutableStateFlow<Int> = MutableStateFlow(0)
 
     fun startRecording(path: String) {
