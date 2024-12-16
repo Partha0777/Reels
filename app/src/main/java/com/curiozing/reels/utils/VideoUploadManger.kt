@@ -17,7 +17,6 @@ class CloudinaryUploader : VideoUploadManger {
             .option("resource_type", "video")
             .callback(object : UploadCallback {
                 override fun onStart(requestId: String?) {
-                    Log.d("Started Uploading", "")
                 }
 
                 override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
