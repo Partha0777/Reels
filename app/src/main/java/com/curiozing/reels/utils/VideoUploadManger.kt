@@ -1,6 +1,5 @@
 package com.curiozing.reels.utils
 
-import android.util.Log
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
