@@ -21,21 +21,14 @@ class CloudinaryUploader : VideoUploadManger {
 
                 override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
                     val percentage = (bytes.toDouble() / totalBytes.toDouble()) * 100
-
-                    Log.d("onProgress Uploading", "${percentage.toInt()}")
-
                     onVideoUploading(percentage.toInt())
                 }
 
                 override fun onSuccess(requestId: String?, resultData: MutableMap<Any?, Any?>?) {
-                    Log.d("onProgress Success", "")
-
                     onVideoUploadSuccess()
                 }
 
                 override fun onError(requestId: String?, error: ErrorInfo?) {
-                    Log.d("uload Error", "$error")
-
                     onVideoUploadFailure()
                 }
 
