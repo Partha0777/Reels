@@ -15,7 +15,8 @@ class CloudinaryUploader : VideoUploadManger {
         MediaManager.get().upload(path)
             .option("resource_type", "video")
             .callback(object : UploadCallback {
-                override fun onStart(requestId: String?) {}
+                override fun onStart(requestId: String?) {
+                }
 
                 override fun onProgress(requestId: String?, bytes: Long, totalBytes: Long) {
                     val percentage = (bytes.toDouble() / totalBytes.toDouble()) * 100
@@ -34,7 +35,8 @@ class CloudinaryUploader : VideoUploadManger {
             }).dispatch()
     }
 
-    override fun updateVideoUrlToDatabase() {}
+    override fun updateVideoUrlToDatabase() {
+    }
 }
 
 
