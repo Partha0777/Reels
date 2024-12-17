@@ -149,7 +149,7 @@ fun CreateReel() {
         }
 
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = createReelViewModel.progress.collectAsState().value.toString())
+        Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
 
     }
 }
