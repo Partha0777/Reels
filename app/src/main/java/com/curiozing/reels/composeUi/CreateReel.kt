@@ -149,7 +149,14 @@ fun CreateReel() {
         }
 
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
+        when(createReelViewModel.progress.collectAsState().value){
+            0 -> {}
+            100 ->{
+                Text(text = "Successfully Uploaded!")
+            }else ->{
+            Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
+        }
+        }
 
     }
 }
