@@ -55,32 +55,32 @@ fun CreateReel() {
     val permissions = Manifest.permission.CAMERA
     val createReelViewModel: CreateReelViewModel = viewModel()
 
-    val permissionResultLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult(),
-            onResult = {
-                if (it.resultCode == Activity.RESULT_OK) {
-                    val datPath = it.data?.data
-                    datPath?.path?.let { _ ->
-                        getFilePathFromUri(context, it.data?.data!!)?.let { path ->
-                            createReelViewModel.startRecording(path)
-                        }
+    val permissionResultLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val datPath = it.data?.data
+                datPath?.path?.let { _ ->
+                    getFilePathFromUri(context, it.data?.data!!)?.let { path ->
+                        createReelViewModel.startRecording(path)
                     }
                 }
-            })
+            }
+        })
 
     fun recordVideo() {
         val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
         permissionResultLauncher.launch(videoIntent)
     }
 
-    val permissionRequestLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(),
-            onResult = { isGrandad ->
-                permissionsGranted = isGrandad
-                if (permissionsGranted) {
-                    recordVideo()
-                }
-            })
+    val permissionRequestLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGrandad ->
+            permissionsGranted = isGrandad
+            if (permissionsGranted) {
+                recordVideo()
+            }
+        })
 
     LaunchedEffect(Unit) {
         permissionsGranted = ContextCompat.checkSelfPermission(
