@@ -122,8 +122,6 @@ fun CreateReel() {
                     )
                     Spacer(modifier = Modifier.height(12.dp))
                     Text(text = "Create Reel")
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text(text = createReelViewModel.progress.collectAsState().value.toString())
                 }
             }
             Box(
@@ -149,6 +147,10 @@ fun CreateReel() {
                 }
             }
         }
+
+        Spacer(modifier = Modifier.height(40.dp))
+        Text(text = createReelViewModel.progress.collectAsState().value.toString())
+
     }
 }
 
