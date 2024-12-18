@@ -148,7 +148,7 @@ fun CreateReel() {
             }
         }
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(80.dp))
         when (createReelViewModel.progress.collectAsState().value) {
             0 -> {}
             100 -> {
