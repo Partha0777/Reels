@@ -35,7 +35,7 @@ class CloudinaryUploader : VideoUploadManger {
             }).dispatch()
     }
 
-    override fun updateVideoUrlToDatabase() {
+    override fun updateVideoUrlToDatabase(videoSrc: String) {
     }
 }
 
@@ -48,6 +48,6 @@ interface VideoUploadManger {
         onVideoUploadFailure: () -> Unit
     )
 
-    fun updateVideoUrlToDatabase()
+    fun updateVideoUrlToDatabase(videoSrc: String)
 
 }
