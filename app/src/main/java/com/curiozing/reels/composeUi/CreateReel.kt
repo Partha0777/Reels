@@ -154,6 +154,7 @@ fun CreateReel() {
             100 -> {
                 Text(text = "Successfully Uploaded!")
             }
+
             else -> {
                 Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
             }
