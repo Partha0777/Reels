@@ -50,6 +50,7 @@ import com.curiozing.reels.viewModel.CreateReelViewModel
 
 @Composable
 fun CreateReel() {
+
     val context = LocalContext.current
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
@@ -158,7 +159,6 @@ fun CreateReel() {
                 Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
             }
         }
-
     }
 }
 
