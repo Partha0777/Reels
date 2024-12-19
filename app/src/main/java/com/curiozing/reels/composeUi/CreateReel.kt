@@ -56,7 +56,7 @@ fun CreateReel() {
     val permissions = Manifest.permission.CAMERA
     val createReelViewModel: CreateReelViewModel = viewModel()
 
-    val permissionResultLauncher = rememberLauncherForActivityResult(
+    val videoRecordRequestLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
         onResult = {
             if (it.resultCode == Activity.RESULT_OK) {
@@ -71,7 +71,7 @@ fun CreateReel() {
 
     fun recordVideo() {
         val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-        permissionResultLauncher.launch(videoIntent)
+        videoRecordRequestLauncher.launch(videoIntent)
     }
 
     val permissionRequestLauncher = rememberLauncherForActivityResult(
