@@ -62,26 +62,23 @@ fun MyReels(navigateTo: () -> Unit) {
         reelItemHeight.dp.toPx()
     }
 
-    Scaffold(
-        floatingActionButton = {
-            Box(
-                modifier = Modifier.padding(bottom = 50.dp)
-            ) {
-                FloatingActionButton(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    shape = CircleShape,
-                    onClick = {
-                        navigateTo.invoke()
-                    }) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "Create Reel",
-                        tint = Color.Black
-                    )
-                }
+    Scaffold(floatingActionButton = {
+        Box(
+            modifier = Modifier.padding(bottom = 50.dp)
+        ) {
+            FloatingActionButton(containerColor = MaterialTheme.colorScheme.primary,
+                shape = CircleShape,
+                onClick = {
+                    navigateTo.invoke()
+                }) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Create Reel",
+                    tint = Color.Black
+                )
             }
         }
-    ) {
+    }) {
         if (reelsList.value.isNotEmpty()) {
             ReelsGrid(reelsList.value, reelItemHeight, reelItemHeightInPx)
         } else {
@@ -167,19 +164,18 @@ fun ReelsGrid(reelsList: List<Reels>, reelItemHeight: Double, reelItemHeightInPx
                                             Color.Black.copy(alpha = 0.5f),
                                             Color.Black.copy(alpha = 0.7f),
                                             Color.Black.copy(alpha = 9f)
-                                        ),
-                                        startY = 0f,
-                                        endY = reelItemHeightInPx
+                                        ), startY = 0f, endY = reelItemHeightInPx
                                     )
-                                ),
-                            contentAlignment = Alignment.BottomStart
+                                ), contentAlignment = Alignment.BottomStart
                         ) {
                             Column {
                                 Text(
-                                    text = reel.descriptions, maxLines = 2,
+                                    text = reel.descriptions,
+                                    maxLines = 2,
                                     lineHeight = 16.sp,
                                     modifier = Modifier.padding(start = 12.dp),
-                                    fontSize = 12.sp, color = Color.White
+                                    fontSize = 12.sp,
+                                    color = Color.White
                                 )
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Row(
@@ -213,10 +209,8 @@ fun ReelsGrid(reelsList: List<Reels>, reelItemHeight: Double, reelItemHeightInPx
 @Composable
 fun UserInteractionItem(iconId: Int, content: String) {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(
-            top = 6.dp,
-            bottom = 12.dp
+        verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(
+            top = 6.dp, bottom = 12.dp
         )
     ) {
         Icon(
@@ -227,9 +221,7 @@ fun UserInteractionItem(iconId: Int, content: String) {
         )
         Spacer(modifier = Modifier.width(6.dp))
         Text(
-            text = content,
-            fontSize = 14.sp,
-            color = Color.White
+            text = content, fontSize = 14.sp, color = Color.White
         )
     }
 }
