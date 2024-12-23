@@ -18,6 +18,7 @@ class ReelsViewModel : ViewModel() {
     init {
         getReelsList()
     }
+
     private fun getReelsList() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
