@@ -12,6 +12,7 @@ class CreateReelViewModel : ViewModel() {
 
     fun startRecording(path: String) {
         videoUploadManger.uploadVideo(path, { progressValue ->
-            progress.value = progressValue }, {}, {})
+            progress.value = progressValue
+        }, {}, {})
     }
 }
