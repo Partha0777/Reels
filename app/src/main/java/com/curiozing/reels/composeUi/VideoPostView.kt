@@ -14,14 +14,15 @@ import androidx.media3.ui.PlayerView
 @Composable
 fun VideoPostView() {
     Box {
-
+        videoPlayer("")
     }
 }
 
 
 @Composable
-fun VideoPlayer(src: String): PlayerView {
+fun videoPlayer(src: String): PlayerView {
     val context = LocalContext.current
+
     val exoplayer = ExoPlayer.Builder(context).build().apply {
         this.setMediaItem(MediaItem.fromUri(Uri.parse(src)))
     }
