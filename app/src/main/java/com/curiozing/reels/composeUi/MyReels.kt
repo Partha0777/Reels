@@ -87,8 +87,7 @@ fun MyReels(navigateTo: () -> Unit) {
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-
-                ) {
+            ) {
                 CircularProgressIndicator()
             }
         }
