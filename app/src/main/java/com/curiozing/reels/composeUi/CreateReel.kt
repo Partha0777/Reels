@@ -63,7 +63,8 @@ fun CreateReel() {
                     val datPath = it.data?.data
                     datPath?.path?.let { _ ->
                         getFilePathFromUri(context, it.data?.data!!)?.let { path ->
-                            createReelViewModel.startRecording(path)
+                            createReelViewModel.videoUri.value = path
+                            //createReelViewModel.startRecording(path)
                         }
                     }
                 }
@@ -94,59 +95,64 @@ fun CreateReel() {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Box(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(20))
-                    .background(MaterialTheme.colorScheme.primary)
-                    .clickable(onClick = {
-                        if (permissionsGranted) {
-                            recordVideo()
-                        } else {
-                            permissionRequestLauncher.launch(permissions)
-                        }
-                    },
-                        indication = ripple(bounded = true, color = Color.Gray),
-                        interactionSource = remember { MutableInteractionSource() })
-                    .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
-
+        if(createReelViewModel.videoUri.collectAsState().value.isNotEmpty()){
+            VideoPlayer(src = createReelViewModel.videoUri.value)
+        }else{
+            Row(
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                Box(
+                    modifier = Modifier
+                        .clip(shape = RoundedCornerShape(20))
+                        .background(MaterialTheme.colorScheme.primary)
+                        .clickable(onClick = {
+                            if (permissionsGranted) {
+                                recordVideo()
+                            } else {
+                                permissionRequestLauncher.launch(permissions)
+                            }
+                        },
+                            indication = ripple(bounded = true, color = Color.Gray),
+                            interactionSource = remember { MutableInteractionSource() })
+                        .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+
                 ) {
-                    Icon(
-                        imageVector = Icons.Filled.PlayArrow,
-                        contentDescription = "",
-                        Modifier.size(50.dp)
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text(text = "Create Reel")
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.PlayArrow,
+                            contentDescription = "",
+                            Modifier.size(50.dp)
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(text = "Create Reel")
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .clip(shape = RoundedCornerShape(20))
+                        .background(MaterialTheme.colorScheme.primary)
+                        .clickable(onClick = {},
+                            indication = ripple(bounded = true, color = Color.Gray),
+                            interactionSource = remember { MutableInteractionSource() })
+                        .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Add,
+                            contentDescription = "",
+                            Modifier.size(50.dp)
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(text = "Create Post")
+                    }
                 }
             }
-            Box(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(20))
-                    .background(MaterialTheme.colorScheme.primary)
-                    .clickable(onClick = {},
-                        indication = ripple(bounded = true, color = Color.Gray),
-                        interactionSource = remember { MutableInteractionSource() })
-                    .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
 
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Add,
-                        contentDescription = "",
-                        Modifier.size(50.dp)
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text(text = "Create Post")
-                }
-            }
         }
 
         Spacer(modifier = Modifier.height(80.dp))
