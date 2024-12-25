@@ -36,8 +36,7 @@ fun VideoPlayer(src: String) {
     val player = PlayerView(context).apply {
         player = exoplayer
         layoutParams = FrameLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
         )
     }
     AndroidView(factory = {
