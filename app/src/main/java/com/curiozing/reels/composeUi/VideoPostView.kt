@@ -28,6 +28,7 @@ fun VideoPlayer(src: String) {
         playWhenReady = true
     }
 
+
     val player = PlayerView(context).apply {
         player = exoplayer
         layoutParams = FrameLayout.LayoutParams(
