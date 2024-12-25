@@ -95,9 +95,9 @@ fun CreateReel() {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-        if(createReelViewModel.videoUri.collectAsState().value.isNotEmpty()){
+        if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
             VideoPlayer(src = createReelViewModel.videoUri.value)
-        }else{
+        } else {
             Row(
                 modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
             ) {
