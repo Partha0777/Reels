@@ -41,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -55,6 +56,8 @@ fun CreateReel() {
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
     val createReelViewModel: CreateReelViewModel = viewModel()
+
+    val localConfiguration = LocalConfiguration.current
 
     val videoRecordRequestLauncher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult(),
@@ -96,59 +99,64 @@ fun CreateReel() {
         modifier = Modifier.fillMaxSize()
     ) {
         if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
-            VideoPlayer(src = createReelViewModel.videoUri.value)
+            Box(modifier = Modifier.height(localConfiguration.screenHeightDp.div(2).dp)) {
+                VideoPlayer(src = createReelViewModel.videoUri.value)
+            }
         } else {
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Box(
-                    modifier = Modifier
-                        .clip(shape = RoundedCornerShape(20))
-                        .background(MaterialTheme.colorScheme.primary)
-                        .clickable(onClick = {
-                            if (permissionsGranted) {
-                                recordVideo()
-                            } else {
-                                permissionRequestLauncher.launch(permissions)
-                            }
-                        },
-                            indication = ripple(bounded = true, color = Color.Gray),
-                            interactionSource = remember { MutableInteractionSource() })
-                        .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
-
+            Column {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                    Box(
+                        modifier = Modifier
+                            .clip(shape = RoundedCornerShape(20))
+                            .background(MaterialTheme.colorScheme.primary)
+                            .clickable(onClick = {
+                                if (permissionsGranted) {
+                                    recordVideo()
+                                } else {
+                                    permissionRequestLauncher.launch(permissions)
+                                }
+                            },
+                                indication = ripple(bounded = true, color = Color.Gray),
+                                interactionSource = remember { MutableInteractionSource() })
+                            .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+
                     ) {
-                        Icon(
-                            imageVector = Icons.Filled.PlayArrow,
-                            contentDescription = "",
-                            Modifier.size(50.dp)
-                        )
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(text = "Create Reel")
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.PlayArrow,
+                                contentDescription = "",
+                                Modifier.size(50.dp)
+                            )
+                            Spacer(modifier = Modifier.height(12.dp))
+                            Text(text = "Create Reel")
+                        }
                     }
-                }
-                Box(
-                    modifier = Modifier
-                        .clip(shape = RoundedCornerShape(20))
-                        .background(MaterialTheme.colorScheme.primary)
-                        .clickable(onClick = {},
-                            indication = ripple(bounded = true, color = Color.Gray),
-                            interactionSource = remember { MutableInteractionSource() })
-                        .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+                    Box(
+                        modifier = Modifier
+                            .clip(shape = RoundedCornerShape(20))
+                            .background(MaterialTheme.colorScheme.primary)
+                            .clickable(onClick = {},
+                                indication = ripple(bounded = true, color = Color.Gray),
+                                interactionSource = remember { MutableInteractionSource() })
+                            .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
 
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Icon(
-                            imageVector = Icons.Filled.Add,
-                            contentDescription = "",
-                            Modifier.size(50.dp)
-                        )
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(text = "Create Post")
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Add,
+                                contentDescription = "",
+                                Modifier.size(50.dp)
+                            )
+                            Spacer(modifier = Modifier.height(12.dp))
+                            Text(text = "Create Post")
+                        }
                     }
                 }
             }
