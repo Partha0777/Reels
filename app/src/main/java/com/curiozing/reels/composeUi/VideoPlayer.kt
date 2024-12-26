@@ -15,6 +15,7 @@ import androidx.media3.ui.PlayerView
 
 @Composable
 fun VideoPlayer(src: String) {
+
     val context = LocalContext.current
 
     val exoplayer = ExoPlayer.Builder(context).build().apply {
@@ -24,20 +25,17 @@ fun VideoPlayer(src: String) {
     }
 
 
-    val player = PlayerView(context).apply {
-        player = exoplayer
-        layoutParams = FrameLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        findViewById<View>(androidx.media3.ui.R.id.exo_settings)?.visibility = View.GONE
-        findViewById<View>(androidx.media3.ui.R.id.exo_next)?.visibility = View.GONE
-        findViewById<View>(androidx.media3.ui.R.id.exo_prev)?.visibility = View.GONE
-        findViewById<View>(androidx.media3.ui.R.id.exo_settings)?.visibility = View.GONE
-
-    }
     AndroidView(factory = {
-        player
-
+        PlayerView(context).apply {
+            player = exoplayer
+            layoutParams = FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            findViewById<View>(androidx.media3.ui.R.id.exo_settings)?.visibility = View.GONE
+            findViewById<View>(androidx.media3.ui.R.id.exo_next)?.visibility = View.GONE
+            findViewById<View>(androidx.media3.ui.R.id.exo_prev)?.visibility = View.GONE
+            findViewById<View>(androidx.media3.ui.R.id.exo_settings)?.visibility = View.GONE
+        }
     })
 
     DisposableEffect(Unit) {
