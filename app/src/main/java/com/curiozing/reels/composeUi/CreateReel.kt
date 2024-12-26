@@ -93,86 +93,84 @@ fun CreateReel() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
-            Box(modifier = Modifier.height(localConfiguration.screenHeightDp.div(2).dp)) {
-                VideoPlayer(src = createReelViewModel.videoUri.value)
-            }
-        } else {
-            Column {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+    if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
+        Box(modifier = Modifier.height(localConfiguration.screenHeightDp.div(2).dp)) {
+            VideoPlayer(src = createReelViewModel.videoUri.value)
+        }
+    } else {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Box(
+                    modifier = Modifier
+                        .clip(shape = RoundedCornerShape(20))
+                        .background(MaterialTheme.colorScheme.primary)
+                        .clickable(onClick = {
+                            if (permissionsGranted) {
+                                recordVideo()
+                            } else {
+                                permissionRequestLauncher.launch(permissions)
+                            }
+                        },
+                            indication = ripple(bounded = true, color = Color.Gray),
+                            interactionSource = remember { MutableInteractionSource() })
+                        .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .clip(shape = RoundedCornerShape(20))
-                            .background(MaterialTheme.colorScheme.primary)
-                            .clickable(onClick = {
-                                if (permissionsGranted) {
-                                    recordVideo()
-                                } else {
-                                    permissionRequestLauncher.launch(permissions)
-                                }
-                            },
-                                indication = ripple(bounded = true, color = Color.Gray),
-                                interactionSource = remember { MutableInteractionSource() })
-                            .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
-
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.PlayArrow,
-                                contentDescription = "",
-                                Modifier.size(50.dp)
-                            )
-                            Spacer(modifier = Modifier.height(12.dp))
-                            Text(text = "Create Reel")
-                        }
+                        Icon(
+                            imageVector = Icons.Filled.PlayArrow,
+                            contentDescription = "",
+                            Modifier.size(50.dp)
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(text = "Create Reel")
                     }
-                    Box(
-                        modifier = Modifier
-                            .clip(shape = RoundedCornerShape(20))
-                            .background(MaterialTheme.colorScheme.primary)
-                            .clickable(onClick = {},
-                                indication = ripple(bounded = true, color = Color.Gray),
-                                interactionSource = remember { MutableInteractionSource() })
-                            .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
+                }
+                Box(
+                    modifier = Modifier
+                        .clip(shape = RoundedCornerShape(20))
+                        .background(MaterialTheme.colorScheme.primary)
+                        .clickable(onClick = {},
+                            indication = ripple(bounded = true, color = Color.Gray),
+                            interactionSource = remember { MutableInteractionSource() })
+                        .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
 
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.Add,
-                                contentDescription = "",
-                                Modifier.size(50.dp)
-                            )
-                            Spacer(modifier = Modifier.height(12.dp))
-                            Text(text = "Create Post")
-                        }
+                        Icon(
+                            imageVector = Icons.Filled.Add,
+                            contentDescription = "",
+                            Modifier.size(50.dp)
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(text = "Create Post")
                     }
                 }
             }
-
         }
 
-        Spacer(modifier = Modifier.height(80.dp))
-        when (createReelViewModel.progress.collectAsState().value) {
-            0 -> {}
-            100 -> {
-                Text(text = "Successfully Uploaded!")
-            }
+    }
 
-            else -> {
-                Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
-            }
+    Spacer(modifier = Modifier.height(80.dp))
+    when (createReelViewModel.progress.collectAsState().value) {
+        0 -> {}
+        100 -> {
+            Text(text = "Successfully Uploaded!")
+        }
+
+        else -> {
+            Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
         }
     }
 }
