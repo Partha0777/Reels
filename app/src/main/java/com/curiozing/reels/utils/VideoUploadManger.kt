@@ -12,8 +12,7 @@ class CloudinaryUploader : VideoUploadManger {
         onVideoUploadSuccess: () -> Unit,
         onVideoUploadFailure: () -> Unit
     ) {
-        MediaManager.get().upload(path)
-            .option("resource_type", "video")
+        MediaManager.get().upload(path).option("resource_type", "video")
             .callback(object : UploadCallback {
                 override fun onStart(requestId: String?) {
                 }
