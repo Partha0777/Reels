@@ -94,7 +94,11 @@ fun CreateReel() {
     }
 
     if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
-        Box(modifier = Modifier.height(localConfiguration.screenHeightDp.div(2).dp).background(Color.Black)) {
+        Box(
+            modifier = Modifier
+                .height(localConfiguration.screenHeightDp.div(2).dp)
+                .background(Color.Black)
+        ) {
             VideoPlayer(src = createReelViewModel.videoUri.value)
         }
     } else {
