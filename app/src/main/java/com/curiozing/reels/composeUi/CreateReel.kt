@@ -64,33 +64,33 @@ fun CreateReel() {
 
     val localConfiguration = LocalConfiguration.current
 
-    val videoRecordRequestLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult(),
-            onResult = {
-                if (it.resultCode == Activity.RESULT_OK) {
-                    val datPath = it.data?.data
-                    datPath?.path?.let { _ ->
-                        getFilePathFromUri(context, it.data?.data!!)?.let { path ->
-                            createReelViewModel.videoUri.value = path
-                            //createReelViewModel.startRecording(path)
-                        }
+    val videoRecordRequestLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val datPath = it.data?.data
+                datPath?.path?.let { _ ->
+                    getFilePathFromUri(context, it.data?.data!!)?.let { path ->
+                        createReelViewModel.videoUri.value = path
+                        //createReelViewModel.startRecording(path)
                     }
                 }
-            })
+            }
+        })
 
     fun recordVideo() {
         val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
         videoRecordRequestLauncher.launch(videoIntent)
     }
 
-    val permissionRequestLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(),
-            onResult = { isGrandad ->
-                permissionsGranted = isGrandad
-                if (permissionsGranted) {
-                    recordVideo()
-                }
-            })
+    val permissionRequestLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGrandad ->
+            permissionsGranted = isGrandad
+            if (permissionsGranted) {
+                recordVideo()
+            }
+        })
 
     LaunchedEffect(Unit) {
         permissionsGranted = ContextCompat.checkSelfPermission(
@@ -113,8 +113,7 @@ fun CreateReel() {
             modifier = Modifier.fillMaxSize()
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Box(
                     modifier = Modifier
