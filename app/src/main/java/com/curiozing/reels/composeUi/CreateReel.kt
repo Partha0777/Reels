@@ -102,7 +102,14 @@ fun CreateReel() {
             Box(
                 modifier = Modifier
                     .height(localConfiguration.screenHeightDp.div(2).dp)
-                    .background(brush = Brush.verticalGradient(colors = listOf(Orange50, Orange300)))
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Orange50,
+                                Orange300
+                            )
+                        )
+                    )
             ) {
                 VideoPlayer(src = createReelViewModel.videoUri.value)
             }
