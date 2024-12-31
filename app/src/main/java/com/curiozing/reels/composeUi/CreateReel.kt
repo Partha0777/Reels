@@ -71,6 +71,7 @@ fun CreateReel() {
                 datPath?.path?.let { _ ->
                     getFilePathFromUri(context, it.data?.data!!)?.let { path ->
                         createReelViewModel.videoUri.value = path
+                        //Need to call below code for upload the video
                         //createReelViewModel.startRecording(path)
                     }
                 }
