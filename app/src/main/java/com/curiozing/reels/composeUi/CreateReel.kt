@@ -97,13 +97,16 @@ fun CreateReel() {
     }
 
     if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
-        Box(
-            modifier = Modifier
-                .height(localConfiguration.screenHeightDp.div(2).dp)
-                .background(brush = Brush.verticalGradient(colors = listOf(Orange50, Orange300)))
-        ) {
-            VideoPlayer(src = createReelViewModel.videoUri.value)
+        Column {
+            Box(
+                modifier = Modifier
+                    .height(localConfiguration.screenHeightDp.div(2).dp)
+                    .background(brush = Brush.verticalGradient(colors = listOf(Orange50, Orange300)))
+            ) {
+                VideoPlayer(src = createReelViewModel.videoUri.value)
+            }
         }
+
     } else {
         Column(
             verticalArrangement = Arrangement.Center,
