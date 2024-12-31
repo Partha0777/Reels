@@ -42,13 +42,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.LinearGradientShader
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.curiozing.reels.ui.theme.Orange100
 import com.curiozing.reels.ui.theme.Orange300
 import com.curiozing.reels.ui.theme.Orange50
 import com.curiozing.reels.viewModel.CreateReelViewModel
