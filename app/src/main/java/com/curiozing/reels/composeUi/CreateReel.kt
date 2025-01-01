@@ -65,7 +65,7 @@ fun CreateReel() {
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
     val createReelViewModel: CreateReelViewModel = viewModel()
-    val tfPostMessage  = remember{ mutableStateOf("") }
+    val tfPostMessage = remember { mutableStateOf("") }
 
     val localConfiguration = LocalConfiguration.current
 
@@ -105,7 +105,12 @@ fun CreateReel() {
     }
 
     if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
-        Column(verticalArrangement = Arrangement.Top, modifier = Modifier.fillMaxHeight().background(color = Color.White)) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            modifier = Modifier
+                .fillMaxHeight()
+                .background(color = Color.White)
+        ) {
             Box(
                 modifier = Modifier
                     .height(localConfiguration.screenHeightDp.div(2).dp)
@@ -128,16 +133,17 @@ fun CreateReel() {
                     focusedIndicatorColor = Orange400
                 ),
                 placeholder = {
-                  Text(text = "Write your message...", fontSize = 16.sp, color = Color.Gray
-                  )
+                    Text(
+                        text = "Write your message...", fontSize = 16.sp, color = Color.Gray
+                    )
                 },
                 textStyle = TextStyle(color = Color.DarkGray, fontSize = 16.sp),
                 modifier = Modifier
                     .padding(horizontal = 20.dp)
                     .fillMaxWidth(),
                 value = tfPostMessage.value, onValueChange = {
-                tfPostMessage.value = it
-            })
+                    tfPostMessage.value = it
+                })
         }
 
     } else {
