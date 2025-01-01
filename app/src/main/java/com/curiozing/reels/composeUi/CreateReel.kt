@@ -99,7 +99,7 @@ fun CreateReel() {
     }
 
     if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
-        Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxHeight()) {
+        Column(verticalArrangement = Arrangement.Top, modifier = Modifier.fillMaxHeight()) {
             Box(
                 modifier = Modifier
                     .height(localConfiguration.screenHeightDp.div(2).dp)
