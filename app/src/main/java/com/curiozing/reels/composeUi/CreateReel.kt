@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources.Theme
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -25,6 +26,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldColors
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.PlayArrow
@@ -46,11 +49,14 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.curiozing.reels.ui.theme.Orange300
+import com.curiozing.reels.ui.theme.Orange400
 import com.curiozing.reels.ui.theme.Orange50
+import com.curiozing.reels.ui.theme.Orange700
 import com.curiozing.reels.viewModel.CreateReelViewModel
 
 
@@ -101,7 +107,7 @@ fun CreateReel() {
     }
 
     if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
-        Column(verticalArrangement = Arrangement.Top, modifier = Modifier.fillMaxHeight()) {
+        Column(verticalArrangement = Arrangement.Top, modifier = Modifier.fillMaxHeight().background(color = Color.White)) {
             Box(
                 modifier = Modifier
                     .height(localConfiguration.screenHeightDp.div(2).dp)
@@ -118,6 +124,10 @@ fun CreateReel() {
             }
             Spacer(modifier = Modifier.height(20.dp))
             TextField(
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color.White,
+                    focusedIndicatorColor = Orange400
+                ),
 
                 placeholder = {
                   Text(text = "Write your message...")
