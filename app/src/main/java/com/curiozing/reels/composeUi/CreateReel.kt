@@ -51,6 +51,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.curiozing.reels.ui.theme.Orange300
@@ -124,14 +125,17 @@ fun CreateReel() {
             }
             Spacer(modifier = Modifier.height(20.dp))
             TextField(
+
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.White,
                     focusedIndicatorColor = Orange400
                 ),
-
                 placeholder = {
-                  Text(text = "Write your message...")
+                  Text(text = "Write your message...", fontSize = 16.sp, color = Color.Gray
+                  )
                 },
+
+                textStyle = TextStyle(color = Color.DarkGray, fontSize = 16.sp),
                 modifier = Modifier
                     .padding(horizontal = 20.dp)
                     .fillMaxWidth(),
