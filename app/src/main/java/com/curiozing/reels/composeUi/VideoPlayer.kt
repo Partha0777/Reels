@@ -31,6 +31,7 @@ fun VideoPlayer(src: String) {
             layoutParams = FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
             )
+
             findViewById<View>(androidx.media3.ui.R.id.exo_settings)?.visibility = View.GONE
             findViewById<View>(androidx.media3.ui.R.id.exo_next)?.visibility = View.GONE
             findViewById<View>(androidx.media3.ui.R.id.exo_prev)?.visibility = View.GONE

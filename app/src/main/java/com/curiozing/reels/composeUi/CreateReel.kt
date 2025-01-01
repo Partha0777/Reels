@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.PlayArrow
@@ -60,6 +61,7 @@ fun CreateReel() {
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
     val createReelViewModel: CreateReelViewModel = viewModel()
+    val tfPostMessage  = remember{ mutableStateOf("") }
 
     val localConfiguration = LocalConfiguration.current
 
@@ -114,6 +116,18 @@ fun CreateReel() {
             ) {
                 VideoPlayer(src = createReelViewModel.videoUri.value)
             }
+            Spacer(modifier = Modifier.height(20.dp))
+            TextField(
+
+                placeholder = {
+                  Text(text = "Write your message...")
+                },
+                modifier = Modifier
+                    .padding(horizontal = 20.dp)
+                    .fillMaxWidth(),
+                value = tfPostMessage.value, onValueChange = {
+                tfPostMessage.value = it
+            })
         }
 
     } else {
