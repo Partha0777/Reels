@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,9 +22,11 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
@@ -126,7 +129,7 @@ fun CreateReel() {
                 VideoPlayer(src = createReelViewModel.videoUri.value)
             }
             Spacer(modifier = Modifier.height(20.dp))
-            TextField(
+           /* TextField(
                 maxLines = 5,
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.White,
@@ -143,7 +146,10 @@ fun CreateReel() {
                     .fillMaxWidth(),
                 value = tfPostMessage.value, onValueChange = {
                     tfPostMessage.value = it
-                })
+                })*/
+            BottomOutlineTextField(placeholder = "Write your message here...", value = tfPostMessage.value) {
+                tfPostMessage.value = it
+            }
         }
 
     } else {
@@ -234,4 +240,41 @@ private fun getFilePathFromUri(context: Context, uri: Uri): String? {
         return filePath
     }
     return null
+}
+
+@Composable
+fun BottomOutlineTextField(placeholder: String, value: String, onValueChange: (String) -> Unit) {
+    val indicationColor = remember {
+        mutableStateOf(Color.Gray)
+    }
+    Column(modifier = Modifier.padding(horizontal = 20.dp)) {
+        BasicTextField(
+            modifier = Modifier.fillMaxWidth().heightIn(min = 22.dp),
+            textStyle = TextStyle(fontSize = 16.sp, color = Color.DarkGray),
+            value = value,
+            onValueChange = onValueChange,
+            decorationBox = { innerTextField ->
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    if (value.isEmpty()) {
+                        Text(
+                            text = placeholder,
+                            color = Color.Gray,
+                            fontSize = 16.sp
+                        )
+                        indicationColor.value = Color.Gray
+                    }else{
+                        indicationColor.value = Orange400
+                    }
+                }
+                innerTextField()
+            }
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(1.dp)
+                .background(indicationColor.value)
+        )
+    }
 }
