@@ -34,6 +34,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.ripple
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -138,10 +139,16 @@ fun CreateReel() {
                items(hashtags.size){
                    Box(modifier = Modifier
                        .padding(start = 12.dp)
-                       .clickable {
+                       .clip(shape = RoundedCornerShape(50))
+                       .clickable(
+                           interactionSource = remember { MutableInteractionSource() },
+                           indication = ripple(
+                               bounded = true,
+                           )
+                       ) {
                            tfPostMessage.value += " ${hashtags[it]}"
                        }
-                       .clip(shape = RoundedCornerShape(50)).background(color = Orange400).padding(horizontal = 12.dp, vertical = 8.dp)){
+                       .background(color = Orange400).padding(horizontal = 12.dp, vertical = 8.dp)){
                        Text(text = hashtags[it], fontSize = 14.sp, color = Color.White)
                    }
                }
