@@ -70,34 +70,34 @@ fun CreateReel() {
 
     val localConfiguration = LocalConfiguration.current
 
-    val videoRecordRequestLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult(),
-        onResult = {
-            if (it.resultCode == Activity.RESULT_OK) {
-                val datPath = it.data?.data
-                datPath?.path?.let { _ ->
-                    getFilePathFromUri(context, it.data?.data!!)?.let { path ->
-                        createReelViewModel.videoUri.value = path
-                        //Need to call below code for upload the video
-                        //createReelViewModel.startRecording(path)
+    val videoRecordRequestLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult(),
+            onResult = {
+                if (it.resultCode == Activity.RESULT_OK) {
+                    val datPath = it.data?.data
+                    datPath?.path?.let { _ ->
+                        getFilePathFromUri(context, it.data?.data!!)?.let { path ->
+                            createReelViewModel.videoUri.value = path
+                            //Need to call below code for upload the video
+                            //createReelViewModel.startRecording(path)
+                        }
                     }
                 }
-            }
-        })
+            })
 
     fun recordVideo() {
         val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
         videoRecordRequestLauncher.launch(videoIntent)
     }
 
-    val permissionRequestLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { isGrandad ->
-            permissionsGranted = isGrandad
-            if (permissionsGranted) {
-                recordVideo()
-            }
-        })
+    val permissionRequestLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(),
+            onResult = { isGrandad ->
+                permissionsGranted = isGrandad
+                if (permissionsGranted) {
+                    recordVideo()
+                }
+            })
 
     LaunchedEffect(Unit) {
         permissionsGranted = ContextCompat.checkSelfPermission(
@@ -118,8 +118,7 @@ fun CreateReel() {
                     .background(
                         brush = Brush.verticalGradient(
                             colors = listOf(
-                                Orange50,
-                                Orange300
+                                Orange50, Orange300
                             )
                         )
                     )
@@ -128,8 +127,7 @@ fun CreateReel() {
             }
             Spacer(modifier = Modifier.height(40.dp))
             BottomOutlineTextField(
-                placeholder = "Write your message here...",
-                value = tfPostMessage.value
+                placeholder = "Write your message here...", value = tfPostMessage.value
             ) {
                 tfPostMessage.value = it
             }
@@ -253,10 +251,9 @@ fun BottomOutlineTextField(placeholder: String, value: String, onValueChange: (S
         mutableStateOf(Color.Gray)
     }
     Column(modifier = Modifier.padding(horizontal = 20.dp)) {
-        BasicTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(min = 22.dp),
+        BasicTextField(modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 22.dp),
             textStyle = TextStyle(fontSize = 16.sp, color = Color.DarkGray),
             value = value,
             onValueChange = onValueChange,
@@ -264,9 +261,7 @@ fun BottomOutlineTextField(placeholder: String, value: String, onValueChange: (S
                 Box(modifier = Modifier.fillMaxWidth()) {
                     if (value.isEmpty()) {
                         Text(
-                            text = placeholder,
-                            color = Color.Gray,
-                            fontSize = 16.sp
+                            text = placeholder, color = Color.Gray, fontSize = 16.sp
                         )
                         indicationColor.value = Color.Gray
                     } else {
@@ -274,8 +269,7 @@ fun BottomOutlineTextField(placeholder: String, value: String, onValueChange: (S
                     }
                 }
                 innerTextField()
-            }
-        )
+            })
         Spacer(modifier = Modifier.height(8.dp))
         Box(
             modifier = Modifier
