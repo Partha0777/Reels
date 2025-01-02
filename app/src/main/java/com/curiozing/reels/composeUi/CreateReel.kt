@@ -129,24 +129,6 @@ fun CreateReel() {
                 VideoPlayer(src = createReelViewModel.videoUri.value)
             }
             Spacer(modifier = Modifier.height(20.dp))
-           /* TextField(
-                maxLines = 5,
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color.White,
-                    focusedIndicatorColor = Orange400
-                ),
-                placeholder = {
-                    Text(
-                        text = "Write your message...", fontSize = 16.sp, color = Color.Gray
-                    )
-                },
-                textStyle = TextStyle(color = Color.DarkGray, fontSize = 16.sp),
-                modifier = Modifier
-                    .padding(horizontal = 20.dp)
-                    .fillMaxWidth(),
-                value = tfPostMessage.value, onValueChange = {
-                    tfPostMessage.value = it
-                })*/
             BottomOutlineTextField(placeholder = "Write your message here...", value = tfPostMessage.value) {
                 tfPostMessage.value = it
             }
