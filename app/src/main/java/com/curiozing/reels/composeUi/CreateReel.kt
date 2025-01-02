@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.TextField
@@ -128,10 +129,25 @@ fun CreateReel() {
             ) {
                 VideoPlayer(src = createReelViewModel.videoUri.value)
             }
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(40.dp))
             BottomOutlineTextField(placeholder = "Write your message here...", value = tfPostMessage.value) {
                 tfPostMessage.value = it
             }
+            Spacer(modifier = Modifier.height(20.dp))
+            LazyRow(content = {
+               items(hashtags.size){
+                   Box(modifier = Modifier
+                       .padding(start = 12.dp)
+                       .clickable {
+                           tfPostMessage.value += " ${hashtags[it]}"
+                       }
+                       .clip(shape = RoundedCornerShape(50)).background(color = Orange400).padding(horizontal = 12.dp, vertical = 8.dp)){
+                       Text(text = hashtags[it], fontSize = 14.sp, color = Color.White)
+                   }
+               }
+            })
+
+
         }
 
     } else {
@@ -231,7 +247,9 @@ fun BottomOutlineTextField(placeholder: String, value: String, onValueChange: (S
     }
     Column(modifier = Modifier.padding(horizontal = 20.dp)) {
         BasicTextField(
-            modifier = Modifier.fillMaxWidth().heightIn(min = 22.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 22.dp),
             textStyle = TextStyle(fontSize = 16.sp, color = Color.DarkGray),
             value = value,
             onValueChange = onValueChange,
@@ -260,3 +278,26 @@ fun BottomOutlineTextField(placeholder: String, value: String, onValueChange: (S
         )
     }
 }
+
+val hashtags = listOf(
+    "#ViralReels",
+    "#ReelsDaily",
+    "#TrendingNow",
+    "#ExplorePage",
+    "#ReelsInspiration",
+    "#ReelsOfInstagram",
+    "#ReelsChallenge",
+    "#ReelsTrend",
+    "#IGReels",
+    "#SocialMediaTrends",
+    "#InstaReels",
+    "#InstagramReels",
+    "#ExploreMore",
+    "#CreativeContent",
+    "#ShortVideos",
+    "#ContentCreator",
+    "#ReelsPopular",
+    "#OnTheReel",
+    "#EntertainmentDaily",
+    "#DailyReels"
+)
