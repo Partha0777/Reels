@@ -131,27 +131,31 @@ fun CreateReel() {
                 VideoPlayer(src = createReelViewModel.videoUri.value)
             }
             Spacer(modifier = Modifier.height(40.dp))
-            BottomOutlineTextField(placeholder = "Write your message here...", value = tfPostMessage.value) {
+            BottomOutlineTextField(
+                placeholder = "Write your message here...",
+                value = tfPostMessage.value
+            ) {
                 tfPostMessage.value = it
             }
             Spacer(modifier = Modifier.height(20.dp))
             LazyRow(content = {
-               items(hashtags.size){
-                   Box(modifier = Modifier
-                       .padding(start = 12.dp)
-                       .clip(shape = RoundedCornerShape(50))
-                       .clickable(
-                           interactionSource = remember { MutableInteractionSource() },
-                           indication = ripple(
-                               bounded = true,
-                           )
-                       ) {
-                           tfPostMessage.value += " ${hashtags[it]}"
-                       }
-                       .background(color = Orange400).padding(horizontal = 12.dp, vertical = 8.dp)){
-                       Text(text = hashtags[it], fontSize = 14.sp, color = Color.White)
-                   }
-               }
+                items(hashtags.size) {
+                    Box(modifier = Modifier
+                        .padding(start = 12.dp)
+                        .clip(shape = RoundedCornerShape(50))
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = ripple(
+                                bounded = true,
+                            )
+                        ) {
+                            tfPostMessage.value += " ${hashtags[it]}"
+                        }
+                        .background(color = Orange400)
+                        .padding(horizontal = 12.dp, vertical = 8.dp)) {
+                        Text(text = hashtags[it], fontSize = 14.sp, color = Color.White)
+                    }
+                }
             })
 
 
@@ -269,7 +273,7 @@ fun BottomOutlineTextField(placeholder: String, value: String, onValueChange: (S
                             fontSize = 16.sp
                         )
                         indicationColor.value = Color.Gray
-                    }else{
+                    } else {
                         indicationColor.value = Orange400
                     }
                 }
