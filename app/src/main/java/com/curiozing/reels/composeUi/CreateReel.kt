@@ -27,10 +27,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.ButtonColors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.ripple
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -108,61 +110,66 @@ fun CreateReel() {
 
     if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
         Column(
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
                 .fillMaxHeight()
                 .background(color = Color.White)
         ) {
-            Box(
-                modifier = Modifier
-                    .height(localConfiguration.screenHeightDp.div(2).dp)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Orange50, Orange300
+            Column {
+                Box(
+                    modifier = Modifier
+                        .height(localConfiguration.screenHeightDp.div(2).dp)
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    Orange50, Orange300
+                                )
                             )
                         )
-                    )
-            ) {
-                VideoPlayer(src = createReelViewModel.videoUri.value)
-            }
-            Spacer(modifier = Modifier.height(40.dp))
-            BottomOutlineTextField(
-                placeholder = "Write your message here...", value = tfPostMessage.value
-            ) {
-                tfPostMessage.value = it
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-            Box(modifier = Modifier.padding(horizontal = 20.dp))
-            {
-                Text(
-                    text = "Add popular #",
-                    fontSize = 16.sp,
-                    color = Color.DarkGray,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            LazyRow(content = {
-                items(hashtags.size) {
-                    Box(modifier = Modifier
-                        .padding(start = 12.dp)
-                        .clip(shape = RoundedCornerShape(50))
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = ripple(
-                                bounded = true,
-                            )
-                        ) {
-                            tfPostMessage.value += " ${hashtags[it]}"
-                        }
-                        .background(color = Orange400)
-                        .padding(horizontal = 12.dp, vertical = 8.dp)) {
-                        Text(text = hashtags[it], fontSize = 14.sp, color = Color.White)
-                    }
+                ) {
+                    VideoPlayer(src = createReelViewModel.videoUri.value)
                 }
-            })
-
+                Spacer(modifier = Modifier.height(40.dp))
+                BottomOutlineTextField(
+                    placeholder = "Write your message here...", value = tfPostMessage.value
+                ) {
+                    tfPostMessage.value = it
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                Box(modifier = Modifier.padding(horizontal = 20.dp))
+                {
+                    Text(
+                        text = "Add popular #",
+                        fontSize = 16.sp,
+                        color = Color.DarkGray,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                LazyRow(content = {
+                    items(hashtags.size) {
+                        Box(modifier = Modifier
+                            .padding(start = 12.dp)
+                            .clip(shape = RoundedCornerShape(50))
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = ripple(
+                                    bounded = true,
+                                )
+                            ) {
+                                tfPostMessage.value += " ${hashtags[it]}"
+                            }
+                            .background(color = Orange400)
+                            .padding(horizontal = 12.dp, vertical = 8.dp)) {
+                            Text(text = hashtags[it], fontSize = 14.sp, color = Color.White)
+                        }
+                    }
+                })
+            }
+            Button(
+                onClick = { /*TODO*/ }) {
+                Text(text = "Post",fontSize = 14.sp, color = Color.White )
+            }
 
         }
 
