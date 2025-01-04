@@ -50,8 +50,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
@@ -69,7 +71,9 @@ fun CreateReel() {
     var permissionsGranted by remember { mutableStateOf(false) }
     val permissions = Manifest.permission.CAMERA
     val createReelViewModel: CreateReelViewModel = viewModel()
-    val tfPostMessage = remember { mutableStateOf("") }
+    var tfPostMessage by remember {
+        mutableStateOf(TextFieldValue(text = ""))
+    }
 
     val localConfiguration = LocalConfiguration.current
 
@@ -131,9 +135,9 @@ fun CreateReel() {
                 }
                 Spacer(modifier = Modifier.height(40.dp))
                 BottomOutlineTextField(
-                    placeholder = "Write your message here...", value = tfPostMessage.value
+                    placeholder = "Write your message here...", value = tfPostMessage
                 ) {
-                    tfPostMessage.value = it
+                    tfPostMessage = tfPostMessage.copy(text = it.text, selection = TextRange(it.text.length))
                 }
                 Spacer(modifier = Modifier.height(20.dp))
                 Box(modifier = Modifier.padding(horizontal = 20.dp))
@@ -157,7 +161,8 @@ fun CreateReel() {
                                     bounded = true,
                                 )
                             ) {
-                                tfPostMessage.value += " ${hashtags[it]}"
+                                val currentText =  tfPostMessage.text +" ${hashtags[it]}"
+                                tfPostMessage = tfPostMessage.copy(text = currentText, selection = TextRange(currentText.length), composition = TextRange(currentText.length))
                             }
                             .background(color = Orange400)
                             .padding(horizontal = 12.dp, vertical = 8.dp)) {
@@ -267,20 +272,23 @@ private fun getFilePathFromUri(context: Context, uri: Uri): String? {
 }
 
 @Composable
-fun BottomOutlineTextField(placeholder: String, value: String, onValueChange: (String) -> Unit) {
+fun BottomOutlineTextField(placeholder: String, value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit) {
     val indicationColor = remember {
         mutableStateOf(Color.Gray)
     }
+
     Column(modifier = Modifier.padding(horizontal = 20.dp)) {
         BasicTextField(modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 22.dp),
             textStyle = TextStyle(fontSize = 16.sp, color = Color.DarkGray),
             value = value,
-            onValueChange = onValueChange,
+            onValueChange = {
+                onValueChange(it)
+            },
             decorationBox = { innerTextField ->
                 Box(modifier = Modifier.fillMaxWidth()) {
-                    if (value.isEmpty()) {
+                    if (value.text.isEmpty()) {
                         Text(
                             text = placeholder, color = Color.Gray, fontSize = 16.sp
                         )
