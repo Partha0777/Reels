@@ -167,7 +167,8 @@ fun CreateReel() {
                 })
             }
             Button(
-                onClick = { /*TODO*/ }) {
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 20.dp),
+                onClick = {  }) {
                 Text(text = "Post",fontSize = 14.sp, color = Color.White )
             }
 
