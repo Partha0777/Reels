@@ -137,7 +137,8 @@ fun CreateReel() {
                 BottomOutlineTextField(
                     placeholder = "Write your message here...", value = tfPostMessage
                 ) {
-                    tfPostMessage = tfPostMessage.copy(text = it.text, selection = TextRange(it.text.length))
+                    tfPostMessage =
+                        tfPostMessage.copy(text = it.text, selection = TextRange(it.text.length))
                 }
                 Spacer(modifier = Modifier.height(20.dp))
                 Box(modifier = Modifier.padding(horizontal = 20.dp))
@@ -161,8 +162,12 @@ fun CreateReel() {
                                     bounded = true,
                                 )
                             ) {
-                                val currentText =  tfPostMessage.text +" ${hashtags[it]}"
-                                tfPostMessage = tfPostMessage.copy(text = currentText, selection = TextRange(currentText.length), composition = TextRange(currentText.length))
+                                val currentText = tfPostMessage.text + " ${hashtags[it]}"
+                                tfPostMessage = tfPostMessage.copy(
+                                    text = currentText,
+                                    selection = TextRange(currentText.length),
+                                    composition = TextRange(currentText.length)
+                                )
                             }
                             .background(color = Orange400)
                             .padding(horizontal = 12.dp, vertical = 8.dp)) {
@@ -272,7 +277,11 @@ private fun getFilePathFromUri(context: Context, uri: Uri): String? {
 }
 
 @Composable
-fun BottomOutlineTextField(placeholder: String, value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit) {
+fun BottomOutlineTextField(
+    placeholder: String,
+    value: TextFieldValue,
+    onValueChange: (TextFieldValue) -> Unit
+) {
     val indicationColor = remember {
         mutableStateOf(Color.Gray)
     }
