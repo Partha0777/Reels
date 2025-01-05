@@ -141,7 +141,10 @@ fun CreateReel() {
                             placeholder = "Write your message here...", value = tfPostMessage
                         ) {
                             tfPostMessage =
-                                tfPostMessage.copy(text = it.text, selection = TextRange(it.text.length))
+                                tfPostMessage.copy(
+                                    text = it.text,
+                                    selection = TextRange(it.text.length)
+                                )
                         }
                         Spacer(modifier = Modifier.height(20.dp))
                         Box(modifier = Modifier.padding(horizontal = 20.dp))
@@ -191,14 +194,29 @@ fun CreateReel() {
 
                 }
             }
+
             100 -> {
-                Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(imageVector = Icons.Default.Check, contentDescription = "", tint = Orange400, modifier = Modifier.size(100.dp))
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Check,
+                        contentDescription = "",
+                        tint = Orange400,
+                        modifier = Modifier.size(100.dp)
+                    )
                     Text(text = "Successfully Uploaded!")
                 }
             }
+
             else -> {
-                Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
                 }
             }
