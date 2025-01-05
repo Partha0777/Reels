@@ -86,7 +86,6 @@ fun CreateReel() {
                         getFilePathFromUri(context, it.data?.data!!)?.let { path ->
                             createReelViewModel.videoUri.value = path
                             //Need to call below code for upload the video
-                            //createReelViewModel.startRecording(path)
                         }
                     }
                 }
@@ -113,77 +112,91 @@ fun CreateReel() {
     }
 
     if (createReelViewModel.videoUri.collectAsState().value.isNotEmpty()) {
-        Column(
-            verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxHeight()
-                .background(color = Color.White)
-        ) {
-            Column {
-                Box(
+        Spacer(modifier = Modifier.height(80.dp))
+        when (createReelViewModel.progress.collectAsState().value) {
+            0 -> {
+                Column(
+                    verticalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
-                        .height(localConfiguration.screenHeightDp.div(2).dp)
-                        .background(
-                            brush = Brush.verticalGradient(
-                                colors = listOf(
-                                    Orange50, Orange300
-                                )
-                            )
-                        )
+                        .fillMaxHeight()
+                        .background(color = Color.White)
                 ) {
-                    VideoPlayer(src = createReelViewModel.videoUri.value)
-                }
-                Spacer(modifier = Modifier.height(40.dp))
-                BottomOutlineTextField(
-                    placeholder = "Write your message here...", value = tfPostMessage
-                ) {
-                    tfPostMessage =
-                        tfPostMessage.copy(text = it.text, selection = TextRange(it.text.length))
-                }
-                Spacer(modifier = Modifier.height(20.dp))
-                Box(modifier = Modifier.padding(horizontal = 20.dp))
-                {
-                    Text(
-                        text = "Add popular #",
-                        fontSize = 16.sp,
-                        color = Color.DarkGray,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                LazyRow(content = {
-                    items(hashtags.size) {
-                        Box(modifier = Modifier
-                            .padding(start = 12.dp)
-                            .clip(shape = RoundedCornerShape(50))
-                            .clickable(
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = ripple(
-                                    bounded = true,
+                    Column {
+                        Box(
+                            modifier = Modifier
+                                .height(localConfiguration.screenHeightDp.div(2).dp)
+                                .background(
+                                    brush = Brush.verticalGradient(
+                                        colors = listOf(
+                                            Orange50, Orange300
+                                        )
+                                    )
                                 )
-                            ) {
-                                val currentText = tfPostMessage.text + " ${hashtags[it]}"
-                                tfPostMessage = tfPostMessage.copy(
-                                    text = currentText,
-                                    selection = TextRange(currentText.length),
-                                    composition = TextRange(currentText.length)
-                                )
-                            }
-                            .background(color = Orange400)
-                            .padding(horizontal = 12.dp, vertical = 8.dp)) {
-                            Text(text = hashtags[it], fontSize = 14.sp, color = Color.White)
+                        ) {
+                            VideoPlayer(src = createReelViewModel.videoUri.value)
                         }
+                        Spacer(modifier = Modifier.height(40.dp))
+                        BottomOutlineTextField(
+                            placeholder = "Write your message here...", value = tfPostMessage
+                        ) {
+                            tfPostMessage =
+                                tfPostMessage.copy(text = it.text, selection = TextRange(it.text.length))
+                        }
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Box(modifier = Modifier.padding(horizontal = 20.dp))
+                        {
+                            Text(
+                                text = "Add popular #",
+                                fontSize = 16.sp,
+                                color = Color.DarkGray,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+                        LazyRow(content = {
+                            items(hashtags.size) {
+                                Box(modifier = Modifier
+                                    .padding(start = 12.dp)
+                                    .clip(shape = RoundedCornerShape(50))
+                                    .clickable(
+                                        interactionSource = remember { MutableInteractionSource() },
+                                        indication = ripple(
+                                            bounded = true,
+                                        )
+                                    ) {
+                                        val currentText = tfPostMessage.text + " ${hashtags[it]}"
+                                        tfPostMessage = tfPostMessage.copy(
+                                            text = currentText,
+                                            selection = TextRange(currentText.length),
+                                            composition = TextRange(currentText.length)
+                                        )
+                                    }
+                                    .background(color = Orange400)
+                                    .padding(horizontal = 12.dp, vertical = 8.dp)) {
+                                    Text(text = hashtags[it], fontSize = 14.sp, color = Color.White)
+                                }
+                            }
+                        })
                     }
-                })
+                    Button(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp, vertical = 20.dp),
+                        onClick = {
+                            createReelViewModel.startRecording()
+                        }) {
+                        Text(text = "Post", fontSize = 14.sp, color = Color.White)
+                    }
+
+                }
             }
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 20.dp),
-                onClick = { }) {
-                Text(text = "Post", fontSize = 14.sp, color = Color.White)
+            100 -> {
+                Text(text = "Successfully Uploaded!")
             }
 
+            else -> {
+                Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
+            }
         }
 
     } else {
@@ -227,7 +240,8 @@ fun CreateReel() {
                     modifier = Modifier
                         .clip(shape = RoundedCornerShape(20))
                         .background(MaterialTheme.colorScheme.primary)
-                        .clickable(onClick = {},
+                        .clickable(onClick = {
+                        },
                             indication = ripple(bounded = true, color = Color.Gray),
                             interactionSource = remember { MutableInteractionSource() })
                         .padding(start = 20.dp, end = 20.dp, top = 80.dp, bottom = 80.dp)
@@ -248,18 +262,6 @@ fun CreateReel() {
             }
         }
 
-    }
-
-    Spacer(modifier = Modifier.height(80.dp))
-    when (createReelViewModel.progress.collectAsState().value) {
-        0 -> {}
-        100 -> {
-            Text(text = "Successfully Uploaded!")
-        }
-
-        else -> {
-            Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
-        }
     }
 }
 

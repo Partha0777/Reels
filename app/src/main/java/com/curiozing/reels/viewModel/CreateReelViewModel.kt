@@ -11,8 +11,8 @@ class CreateReelViewModel : ViewModel() {
     val progress: MutableStateFlow<Int> = MutableStateFlow(0)
     val videoUri: MutableStateFlow<String> = MutableStateFlow("")
 
-    fun startRecording(path: String) {
-        videoUploadManger.uploadVideo(path, { progressValue ->
+    fun startRecording() {
+        videoUploadManger.uploadVideo(videoUri.value, { progressValue ->
             progress.value = progressValue
         }, {}, {})
     }
