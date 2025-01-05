@@ -207,7 +207,7 @@ fun CreateReel() {
                         tint = Orange400,
                         modifier = Modifier.size(100.dp)
                     )
-                    Text(text = "Successfully Uploaded!")
+                    Text(text = "Successfully Posted!")
                 }
             }
 
