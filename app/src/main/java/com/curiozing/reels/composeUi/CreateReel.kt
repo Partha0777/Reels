@@ -30,6 +30,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.ButtonColors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.ripple
 import androidx.compose.material3.Button
@@ -191,11 +192,15 @@ fun CreateReel() {
                 }
             }
             100 -> {
-                Text(text = "Successfully Uploaded!")
+                Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                    Icon(imageVector = Icons.Default.Check, contentDescription = "", tint = Orange400, modifier = Modifier.size(100.dp))
+                    Text(text = "Successfully Uploaded!")
+                }
             }
-
             else -> {
-                Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
+                Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "Uploading ${createReelViewModel.progress.collectAsState().value}%")
+                }
             }
         }
 
