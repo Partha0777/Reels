@@ -194,7 +194,6 @@ fun CreateReel() {
 
                 }
             }
-
             100 -> {
                 Column(
                     modifier = Modifier.fillMaxSize(),
@@ -210,7 +209,6 @@ fun CreateReel() {
                     Text(text = "Successfully Uploaded!")
                 }
             }
-
             else -> {
                 Column(
                     modifier = Modifier.fillMaxSize(),
